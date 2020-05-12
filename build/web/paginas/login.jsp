@@ -12,7 +12,7 @@
     <body class="blue-grey lighten-3">
         <div class="login-container">
             <div class="login-card">
-                <form class="col s12 card" method="post" action="../../LoginController">
+                <form class="col s12 card" method="post" action="/LoginControlle">
                     <div class="row">
                         <div class="col s12 center">
                             <img src="../imgs/logo-icone.png" class="login-img">
