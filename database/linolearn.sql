@@ -1,7 +1,17 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 19-Maio-2020 às 01:16
+-- Versão do servidor: 10.4.11-MariaDB
+-- versão do PHP: 7.4.3
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+03:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -13,9 +23,7 @@ SET time_zone = "+03:00";
 --
 
 DROP SCHEMA IF EXISTS `linolearn`;
-
 CREATE SCHEMA IF NOT EXISTS `linolearn` DEFAULT CHARACTER SET utf8mb4;
-
 USE `linolearn`;
 
 -- --------------------------------------------------------
@@ -28,17 +36,36 @@ CREATE TABLE `course` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `description` text DEFAULT NULL,
-  `owner` int(11) NOT NULL,
+  `image_path` varchar(255) DEFAULT NULL,
   `price` float NOT NULL,
-  `cashback_percentage` int(11) NOT NULL DEFAULT 0
+  `cashback_percentage` int(11) NOT NULL DEFAULT 0,
+  `owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `course`
 --
 
-INSERT INTO `course` (`id`, `name`, `description`, `owner`, `price`, `cashback_percentage`) VALUES
-(1, 'Aprenda Java na prática!', 'Aprenda Java com o maior deus de todos os javeiros: Andreatta! Neste curso você deixará de ser um programador ruim e será um programador bom usando Springboot e Spring MVC.', 4, 19.99, 35);
+INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
+(1, 'Aprenda Java na prática!', 'Aprenda Java com o maior deus de todos os javeiros: Andreatta! Neste curso você deixará de ser um programador ruim e será um programador bom usando Springboot e Spring MVC.', NULL, 19.99, 35, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `course_log_transaction`
+--
+
+CREATE TABLE `course_log_transaction` (
+  `id` int(11) NOT NULL,
+  `buyer` int(11) NOT NULL,
+  `seller` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `course_price` float NOT NULL,
+  `cashback_percentage` int(11) NOT NULL,
+  `cashback_amount` float NOT NULL,
+  `payment_status` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -86,23 +113,6 @@ INSERT INTO `role` (`id`, `type`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `transaction_log`
---
-
-CREATE TABLE `transaction_log` (
-  `id` int(11) NOT NULL,
-  `buyer` int(11) NOT NULL,
-  `seller` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `course_price` float NOT NULL,
-  `cashback_percentage` int(11) NOT NULL,
-  `cashback_amount` float NOT NULL,
-  `payment_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `user`
 --
 
@@ -127,6 +137,34 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `video`
+--
+
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `path` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `video_watched`
+--
+
+CREATE TABLE `video_watched` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_video` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `finished` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `wallet`
 --
 
@@ -144,6 +182,20 @@ INSERT INTO `wallet` (`id`, `user`, `amount`) VALUES
 (1, 1, 0),
 (2, 4, 50.51);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `wallet_log_transaction`
+--
+
+CREATE TABLE `wallet_log_transaction` (
+  `id` int(11) NOT NULL,
+  `id_wallet` int(11) NOT NULL,
+  `added_amount` float NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `payment_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tabelas despejadas
 --
@@ -154,6 +206,16 @@ INSERT INTO `wallet` (`id`, `user`, `amount`) VALUES
 ALTER TABLE `course`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_course_owner_user_idx` (`owner`);
+
+--
+-- Índices para tabela `course_log_transaction`
+--
+ALTER TABLE `course_log_transaction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_transaction_log_course_selled_idx` (`course_id`),
+  ADD KEY `fk_transaction_log_user_seller_idx` (`seller`),
+  ADD KEY `fk_transaction_log_user_buyer_idx` (`buyer`),
+  ADD KEY `fk_transaction_log_payment_status_idx` (`payment_status`);
 
 --
 -- Índices para tabela `payment_status`
@@ -168,16 +230,6 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `transaction_log`
---
-ALTER TABLE `transaction_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_transaction_log_course_selled_idx` (`course_id`),
-  ADD KEY `fk_transaction_log_user_seller_idx` (`seller`),
-  ADD KEY `fk_transaction_log_user_buyer_idx` (`buyer`),
-  ADD KEY `fk_transaction_log_payment_status_idx` (`payment_status`);
-
---
 -- Índices para tabela `user`
 --
 ALTER TABLE `user`
@@ -187,11 +239,35 @@ ALTER TABLE `user`
   ADD KEY `fk_user_role_idx` (`role`) USING BTREE;
 
 --
+-- Índices para tabela `video`
+--
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_video_course_id` (`course_id`);
+
+--
+-- Índices para tabela `video_watched`
+--
+ALTER TABLE `video_watched`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_video_watched_course_user_video_id` (`course_id`),
+  ADD KEY `fk_video_watched_user_course_video_id` (`id_user`),
+  ADD KEY `fk_video_watched_video_user_course_id` (`id_video`);
+
+--
 -- Índices para tabela `wallet`
 --
 ALTER TABLE `wallet`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_idx` (`user`);
+
+--
+-- Índices para tabela `wallet_log_transaction`
+--
+ALTER TABLE `wallet_log_transaction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_wallet_log_transaction_id_wallet` (`id_wallet`),
+  ADD KEY `fk_wallet_log_transaction_payment_status` (`payment_status`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -202,6 +278,12 @@ ALTER TABLE `wallet`
 --
 ALTER TABLE `course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `course_log_transaction`
+--
+ALTER TABLE `course_log_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `payment_status`
@@ -216,22 +298,34 @@ ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de tabela `transaction_log`
---
-ALTER TABLE `transaction_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de tabela `video`
+--
+ALTER TABLE `video`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `video_watched`
+--
+ALTER TABLE `video_watched`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `wallet`
 --
 ALTER TABLE `wallet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `wallet_log_transaction`
+--
+ALTER TABLE `wallet_log_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
@@ -244,9 +338,9 @@ ALTER TABLE `course`
   ADD CONSTRAINT `fk_course_owner_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `transaction_log`
+-- Limitadores para a tabela `course_log_transaction`
 --
-ALTER TABLE `transaction_log`
+ALTER TABLE `course_log_transaction`
   ADD CONSTRAINT `fk_transaction_log_course_selled` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_transaction_log_payment_status` FOREIGN KEY (`payment_status`) REFERENCES `payment_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_transaction_log_user_buyer` FOREIGN KEY (`buyer`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -259,10 +353,31 @@ ALTER TABLE `user`
   ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON UPDATE CASCADE;
 
 --
+-- Limitadores para a tabela `video`
+--
+ALTER TABLE `video`
+  ADD CONSTRAINT `fk_video_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `video_watched`
+--
+ALTER TABLE `video_watched`
+  ADD CONSTRAINT `fk_video_watched_course_user_video_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_video_watched_user_course_video_id` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_video_watched_video_user_course_id` FOREIGN KEY (`id_video`) REFERENCES `video` (`id`) ON UPDATE CASCADE;
+
+--
 -- Limitadores para a tabela `wallet`
 --
 ALTER TABLE `wallet`
   ADD CONSTRAINT `fk_wallet_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `wallet_log_transaction`
+--
+ALTER TABLE `wallet_log_transaction`
+  ADD CONSTRAINT `fk_wallet_log_transaction_id_wallet` FOREIGN KEY (`id_wallet`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_wallet_log_transaction_payment_status` FOREIGN KEY (`payment_status`) REFERENCES `payment_status` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
