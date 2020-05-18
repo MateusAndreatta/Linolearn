@@ -3,7 +3,7 @@
 <html>
     <head>
         <jsp:include page="head.jsp" >
-            <jsp:param name="title" value="Home"/>
+            <jsp:param name="title" value="Minha conta"/>
         </jsp:include>
     </head>
     <body>
@@ -57,7 +57,7 @@
                                 <label for="linocoins">Linocoins</label>
                             </div>
                         </div>
-                        <a class="waves-effect waves-light btn">Depositar</a>
+                        <a class="waves-effect waves-light btn" href="deposito.jsp">Depositar</a>
                     </div>
                 </div>
 

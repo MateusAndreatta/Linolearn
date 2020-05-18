@@ -8,6 +8,7 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
+        
         <div class="carousel carousel-slider center">
             <div class="carousel-fixed-item center">
                 <a class="btn waves-effect white grey-text darken-text-2">Ver curso</a>
@@ -31,8 +32,120 @@
         </div>
         <div class="container">
             <div class="row">
-
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://picsum.photos/200">
+                            <span class="card-title">Curso Javascript</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="curso.jsp">Ver curso</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
