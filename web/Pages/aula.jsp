@@ -3,25 +3,22 @@
 <html>
     <head>
         <jsp:include page="head.jsp" >
-            <jsp:param name="title" value="Curso"/>
+            <jsp:param name="title" value="Video-aula"/>
         </jsp:include>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="row card">
-                <div class="col s12 m5">
-                    <img src="https://picsum.photos/400">
+                <div class="col s12">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                            src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1"
+                            frameborder="0"></iframe>
                 </div>
                 <div class="col s12 m7">
-                    <h4>Nome do curso</h4>
-                    <h5>Descricao do curso</h5>
-                    <div class="progress tooltipped" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">
-                        <div class="determinate" style="width: 70%"></div>
-                    </div>
-                </div>
-                <div class="col s12">
-                    <h4>Aulas</h4>
+                    <h4>Aula 01</h4>
+                    <p>Nessa aula vemos sobre CRUD com jsp</p>
+                    <button class="btn">Concluir</button>
                 </div>
             </div>
         </div>

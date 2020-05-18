@@ -5,7 +5,7 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="home.jsp">Home</a></li>
             <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="meusCursos.jsp">Meus cursos</a></li>
             <li><a href="minhaConta.jsp">Minha conta</a></li>
         </ul>
     </div>
@@ -13,6 +13,6 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a href="home.jsp">Home</a></li>
     <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="meusCursos.jsp">Meus cursos</a></li>
     <li><a href="minhaConta.jsp">Minha conta</a></li>
 </ul>
