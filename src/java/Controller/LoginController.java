@@ -13,5 +13,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("doPost - Login Controller");
+        response.sendRedirect("Pages/home.jsp");
+//        request.getRequestDispatcher("Pages/home.jsp").forward(request, response);
     }
 }

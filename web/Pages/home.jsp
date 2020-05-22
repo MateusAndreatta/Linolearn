@@ -8,7 +8,7 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        
+
         <div class="carousel carousel-slider center">
             <div class="carousel-fixed-item center">
                 <a class="btn waves-effect white grey-text darken-text-2">Ver curso</a>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                                <div class="col s12 m3">
+                <div class="col s12 m3">
                     <div class="card">
                         <div class="card-image">
                             <img src="https://picsum.photos/200">

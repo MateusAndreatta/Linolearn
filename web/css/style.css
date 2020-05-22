@@ -25,3 +25,7 @@ body, html {
 .minhaconta-card{
     padding: 10px;
 }
+
+.curso-progress{
+    height: 10px;
+}

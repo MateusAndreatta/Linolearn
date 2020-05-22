@@ -16,12 +16,35 @@
                 <div class="col s12 m7">
                     <h4>Nome do curso</h4>
                     <h5>Descricao do curso</h5>
-                    <div class="progress tooltipped" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">
+                    <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">a
                         <div class="determinate" style="width: 70%"></div>
                     </div>
                 </div>
                 <div class="col s12">
                     <h4>Aulas</h4>
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                            <div class="collapsible-body">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <a href="aula.jsp">Assitir a aula</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                            <div class="collapsible-body">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <a href="aula.jsp">Assitir a aula</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                            <div class="collapsible-body">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <a href="aula.jsp">Assitir a aula</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
