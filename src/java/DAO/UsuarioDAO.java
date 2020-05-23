@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Usuario;
+import Model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +14,17 @@ public class UsuarioDAO {
     private ResultSet resultSet;
 
     public UsuarioDAO() {
-        conexao = new Conexao();
+        conexao = Conexao.getInstance();
     }
 
-    public void inserirUsuario(Usuario usuario){
+    public void inserirUsuario(User usuario){
         try {
 //            query = "INSERT INTO usuario(nome,email,senha,idade) VALUES (" +"'"+ usuario.getNome() + "'," + "'"+ usuario.getEmail() + "',"
 //                    + "'"+ usuario.getSenha() + "'," + usuario.getIdade() + ")";
 
             statement = conexao.getConnection().prepareStatement(query);
             statement.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,7 +45,7 @@ public class UsuarioDAO {
         return resultSet;
     }
 
-    public void editar(int id, Usuario usuario){
+    public void editar(int id, User usuario){
         try {
 //            query = "UPDATE usuario SET nome ='"+ usuario.getNome() + "'," + "email = '" + usuario.getEmail() + "'," +
 //            "senha = '" + usuario.getSenha() + "'," + "idade = " + usuario.getIdade() + " WHERE id = " +id;
