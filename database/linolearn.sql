@@ -10,7 +10,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+03:00";
+SET time_zone = "-03:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -62,7 +62,7 @@ CREATE TABLE `course_log_transaction` (
   `course_id` int(11) NOT NULL,
   `course_price` float NOT NULL,
   `cashback_percentage` int(11) NOT NULL,
-  `cashback_amount` float NOT NULL,
+  `amount_cashback` float NOT NULL,
   `payment_status` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
