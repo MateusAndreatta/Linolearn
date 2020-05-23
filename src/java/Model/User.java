@@ -1,8 +1,7 @@
 package Model;
 
-public class User {
+public class User extends BaseModel {
     
-    private int _id;
     private String _firstName;
     private String _lastName;
     private String _email;
@@ -69,10 +68,5 @@ public class User {
 
     public void setRole(int _role) {
         this._role = _role;
-    }
-
-    
-    
-  
-    
+    }  
 }

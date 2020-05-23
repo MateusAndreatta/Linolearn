@@ -1,69 +1,41 @@
 package DAO;
 
 import Model.User;
+import java.security.NoSuchAlgorithmException;
+import Util.HashPassword;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class UsuarioDAO {
-
-    private Conexao conexao;
-    private String query;
-    private PreparedStatement statement;
-    private ResultSet resultSet;
-
-    public UsuarioDAO() {
-        conexao = Conexao.getInstance();
+public class UsuarioDAO extends BaseDAO 
+{
+    private final String colunas = "id, first_name, last_name, email, password, "
+            + "role, wallet";
+    
+    public UsuarioDAO() 
+    {
+        this.conexao = Conexao.getInstance();
     }
 
-    public void inserirUsuario(User usuario){
-        try {
-//            query = "INSERT INTO usuario(nome,email,senha,idade) VALUES (" +"'"+ usuario.getNome() + "'," + "'"+ usuario.getEmail() + "',"
-//                    + "'"+ usuario.getSenha() + "'," + usuario.getIdade() + ")";
-
-            statement = conexao.getConnection().prepareStatement(query);
-            statement.executeUpdate();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void create(User user) throws NoSuchAlgorithmException
+    {
+        
+        this.query = String.format(
+                "INSERT INTO usuario(%s) VALUES (%s, %s, %s, %s, %s, %s, null)",
+                colunas,
+                null,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                HashPassword.hashPassword(user.getPassword()),
+                user.getRole(),
+                null
+        );
+        
+        super.create(query);
     }
 
-    public ResultSet listarUsuario(){
-        try {
-            query = "SELECT * FROM usuario";
-
-            statement = conexao.getConnection().prepareStatement(query);
-
-            statement.executeQuery();
-            resultSet = statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return resultSet;
+    @Override
+    public void update() {
+        super.update(); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void editar(int id, User usuario){
-        try {
-//            query = "UPDATE usuario SET nome ='"+ usuario.getNome() + "'," + "email = '" + usuario.getEmail() + "'," +
-//            "senha = '" + usuario.getSenha() + "'," + "idade = " + usuario.getIdade() + " WHERE id = " +id;
-            statement = conexao.getConnection().prepareStatement(query);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deletar(int id){
-        try {
-            query = "DELETE FROM usuario WHERE id = " + id;
-
-            statement = conexao.getConnection().prepareStatement(query);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    
+    
 }

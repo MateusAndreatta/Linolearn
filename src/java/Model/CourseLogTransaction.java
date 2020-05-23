@@ -1,8 +1,7 @@
 package Model;
 
-public class CourseLogTransaction {
-    
-    private int _id;
+public class CourseLogTransaction extends BaseModel 
+{
     private int _buyer;
     private int _seller;
     private int _courseId;

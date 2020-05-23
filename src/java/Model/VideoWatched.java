@@ -1,8 +1,7 @@
 package Model;
 
-public class VideoWatched 
+public class VideoWatched extends BaseModel 
 {    
-    private int _id;
     private int _idUser;
     private int _idVideo;
     private int _courseId;

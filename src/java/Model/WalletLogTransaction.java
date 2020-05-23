@@ -1,9 +1,8 @@
 package Model;
 
 
-public class WalletLogTransaction 
+public class WalletLogTransaction extends BaseModel 
 {
-    private int _id;
     private int _idWallet;
     private float _addedAmount;
     private String _date;

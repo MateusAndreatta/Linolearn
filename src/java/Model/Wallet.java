@@ -1,9 +1,8 @@
 package Model;
 
 
-public class Wallet 
+public class Wallet extends BaseModel 
 {
-    private int _id;
     private int _user;
     private float _amount;
 

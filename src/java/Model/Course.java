@@ -1,8 +1,7 @@
 package Model;
 
-public class Course {
-    
-    private int _id;
+public class Course extends BaseModel 
+{
     private String _name;
     private String _description;
     private String _imagePath;

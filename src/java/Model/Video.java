@@ -4,9 +4,8 @@ package Model;
  *
  * @author Charlie
  */
-public class Video {
-    
-    private int _id;
+public class Video extends BaseModel 
+{
     private int _courseId;
     private String _name;
     private String _description;
