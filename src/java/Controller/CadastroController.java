@@ -3,7 +3,6 @@ package Controller;
 import DAO.UsuarioDAO;
 import Model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public class CadastroController extends HttpServlet {
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         usuarioDAO.create(user);
-        
+        response.sendRedirect("Pages/login.jsp");
     }
 
 }
