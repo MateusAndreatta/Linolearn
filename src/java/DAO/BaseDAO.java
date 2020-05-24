@@ -21,6 +21,7 @@ public class BaseDAO implements BaseDAOActions
     @Override
     public void create(String query) 
     {
+        System.out.println(query);
         try 
         {
             statement = conexao.getConnection().prepareStatement(query);

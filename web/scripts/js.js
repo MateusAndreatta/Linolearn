@@ -12,7 +12,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('.collapsible').collapsible();
 });
-
+$(document).ready(function () {
+    $('select').formSelect();
+});
 $('.carousel.carousel-slider').carousel({
     fullWidth: true,
     indicators: true

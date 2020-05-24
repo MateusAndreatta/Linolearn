@@ -11,7 +11,7 @@ public class User extends BaseModel {
     public User() {}
     
     
-    public User(int id, String firstName, String lastName, 
+    public User(Integer id, String firstName, String lastName, 
             String email, String password, int role) 
     {
         this._id = id;

@@ -3,10 +3,12 @@ package DAO;
 import Model.User;
 import java.security.NoSuchAlgorithmException;
 import Util.HashPassword;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioDAO extends BaseDAO 
 {
-    private final String colunas = "id, first_name, last_name, email, password, "
+    private final String colunas = "first_name, last_name, email, password, "
             + "role, wallet";
     
     public UsuarioDAO() 
@@ -14,22 +16,26 @@ public class UsuarioDAO extends BaseDAO
         this.conexao = Conexao.getInstance();
     }
 
-    public void create(User user) throws NoSuchAlgorithmException
+    public void create(User user)
     {
-        
-        this.query = String.format(
-                "INSERT INTO usuario(%s) VALUES (%s, %s, %s, %s, %s, %s, null)",
-                colunas,
-                null,
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                HashPassword.hashPassword(user.getPassword()),
-                user.getRole(),
-                null
-        );
-        
-        super.create(query);
+        try {
+            
+            this.query = String.format(
+                    "INSERT INTO user(%s) VALUES (%s, %s, %s, %s, %s, null)",
+                    colunas,
+                    "'" + user.getFirstName() + "'",
+                    "'" + user.getLastName() + "'",
+                    "'" + user.getEmail() + "'",
+                    "'" + HashPassword.hashPassword(user.getPassword()) + "'",
+                    "'" + user.getRole() + "'",
+                    "'" + null + "'"
+            );
+            System.out.println(query);
+            super.create(query);
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

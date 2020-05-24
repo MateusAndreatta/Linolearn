@@ -12,13 +12,14 @@ public class Conexao
     final static String URL = "jdbc:mysql://127.0.0.1:3306/linolearn?useSSL=false";
     final static String USER = "root";
     final static String PASSWORD = "";
+    private String url = "jdbc:mysql://127.0.0.1:3306/linolearn?useSSL=false";
 
     private Conexao()
     {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
+            conexao = (Connection) DriverManager.getConnection(url, "root", "");
         }
         catch (ClassNotFoundException | SQLException e)
         {
