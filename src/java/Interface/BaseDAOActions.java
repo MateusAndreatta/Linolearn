@@ -20,7 +20,7 @@ public interface BaseDAOActions
      *
      * @return resultSet
      */
-    public ResultSet read();
+    public ResultSet read(String query);
 
     /**
      * Update method

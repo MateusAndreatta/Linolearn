@@ -34,10 +34,20 @@ public class BaseDAO implements BaseDAOActions
     }
     
     @Override
-    public ResultSet read() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ResultSet read(String query) {
+        System.out.println(query);
+        try {
+            statement = conexao.getConnection().prepareStatement(query);
+
+            statement.executeQuery();
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 
+    
     @Override
     public void update() {
         throw new UnsupportedOperationException("Not supported yet.");
