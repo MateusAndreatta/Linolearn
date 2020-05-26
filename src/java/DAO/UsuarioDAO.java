@@ -3,6 +3,7 @@ package DAO;
 import Model.User;
 import java.security.NoSuchAlgorithmException;
 import Util.HashPassword;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,5 +71,23 @@ public class UsuarioDAO extends BaseDAO
             return -1;
         }
         
+    }
+    
+    public ResultSet findByEmail(String email){
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * FROM user " +
+                    "WHERE email='%s'",
+                    email
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

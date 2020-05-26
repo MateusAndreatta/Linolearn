@@ -32,7 +32,7 @@ public class CadastroController extends HttpServlet {
         
         Wallet wallet = new Wallet();
 
-         UsuarioDAO usuarioDAO = new UsuarioDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         WalletDAO walletDAO = new WalletDAO();
         
         try 

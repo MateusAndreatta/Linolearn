@@ -17,12 +17,12 @@
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_email" type="text" class="validate">
+                        <input id="icon_email" type="text" name="email" class="validate">
                         <label for="icon_email">E-mail</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">lock</i>
-                        <input id="icon_password" type="password" class="validate">
+                        <input id="icon_password" type="password" name="password" class="validate">
                         <label for="icon_password">Senha</label>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
