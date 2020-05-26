@@ -1,6 +1,6 @@
 <nav class="indigo">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
+        <a href="home.jsp" class="brand-logo">Linolearn</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="home.jsp">Home</a></li>

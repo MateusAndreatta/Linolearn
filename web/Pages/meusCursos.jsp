@@ -1,3 +1,4 @@
+<%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -68,6 +69,12 @@
                     </div>
                 </div>
             </div>
+            
+            <%
+
+                User user = (User) session.getAttribute("user");
+                if (user.getRole() > 1) {
+            %>
             <h4>Cursos criados</h4>
             <div class="row">
                 <div class="col s12 m3">
@@ -132,6 +139,10 @@
                     <a class="waves-effect waves-light btn" href="cadastroCurso.jsp">Criar novo curso</a>
                 </div>
             </div>
+            <%
+                }
+            %>
+            
         </div>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
