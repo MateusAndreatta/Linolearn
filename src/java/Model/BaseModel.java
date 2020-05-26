@@ -2,6 +2,5 @@ package Model;
 
 public class BaseModel 
 {
-    protected Integer _id;
-    
+    protected int _id;
 }

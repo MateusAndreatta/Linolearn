@@ -6,15 +6,11 @@ public interface BaseDAOActions
 {
 
     /**
-     * Create method
-     */
-    public void create();
-
-    /**
      * Create method with query
      * @param query
+     * @return userId
      */
-    public void create(String query);
+    public int create(String query);
     
     /**
      *
@@ -25,7 +21,7 @@ public interface BaseDAOActions
     /**
      * Update method
      */
-    public void update();
+    public int update(String query);
 
     /**
      * Delete Method

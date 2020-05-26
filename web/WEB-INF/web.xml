@@ -8,6 +8,10 @@
         <servlet-name>CadastroController</servlet-name>
         <servlet-class>Controller.CadastroController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WalletDAO</servlet-name>
+        <servlet-class>DAO.WalletDAO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>CadastroController</servlet-name>
         <url-pattern>/CadastroController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WalletDAO</servlet-name>
+        <url-pattern>/WalletDAO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
