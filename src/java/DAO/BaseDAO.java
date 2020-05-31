@@ -14,6 +14,7 @@ public class BaseDAO implements BaseDAOActions
     protected PreparedStatement statement;
     protected ResultSet resultSet;
     protected String colunas = null;
+    protected String nomeTabela = "";
    
     @Override
     public int create(String query) 
@@ -23,7 +24,7 @@ public class BaseDAO implements BaseDAOActions
         try 
         {
             int id = -1;
-            // Definição para retorno do ultimo id criado
+
             this.statement = conexao.getConnection().prepareStatement(
                     this.query,
                     Statement.RETURN_GENERATED_KEYS
@@ -36,7 +37,6 @@ public class BaseDAO implements BaseDAOActions
             
             ResultSet rs = this.statement.getGeneratedKeys();
             
-            // Retorno id do último registro criado
             if(rs.next())
             {
                 id = rs.getInt(1);
@@ -54,7 +54,6 @@ public class BaseDAO implements BaseDAOActions
     @Override
     public ResultSet read(String query) 
     {
-
         printString(query);
          
         try 
@@ -65,14 +64,14 @@ public class BaseDAO implements BaseDAOActions
             
             resultSet = statement.executeQuery();
             
+            return resultSet;
         } 
         catch (SQLException e)
         {
             e.printStackTrace();
+            return null;
         }
-        return resultSet;
     }
-
     
     @Override
     public int update(String query) 
@@ -81,7 +80,6 @@ public class BaseDAO implements BaseDAOActions
          
         try 
         {
-            // Definição para retorno do ultimo id criado
             this.statement = conexao.getConnection().prepareStatement(
                     this.query,
                     Statement.RETURN_GENERATED_KEYS
@@ -92,7 +90,6 @@ public class BaseDAO implements BaseDAOActions
                     Statement.RETURN_GENERATED_KEYS
             );
             
-            // Retorno id do último registro criado
             return update;
         }
         catch (SQLException e) 
@@ -102,10 +99,29 @@ public class BaseDAO implements BaseDAOActions
     }
 
     @Override
-    public void delete() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int delete(String query) 
+    {
+        printString(query);
+         
+        try 
+        {
+            this.statement = conexao.getConnection().prepareStatement(
+                    this.query,
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            
+            int delete = this.statement.executeUpdate(
+                    this.query, 
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            
+            return delete;
+        }
+        catch (SQLException e) 
+        {
+            return -1;
+        }
     }
-    
     
     private void printString(String query)
     {

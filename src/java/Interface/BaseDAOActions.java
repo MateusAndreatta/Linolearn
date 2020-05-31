@@ -14,17 +14,22 @@ public interface BaseDAOActions
     
     /**
      *
+     * @param query
      * @return resultSet
      */
     public ResultSet read(String query);
 
     /**
      * Update method
+     * @param query
+     * @return 
      */
     public int update(String query);
 
     /**
      * Delete Method
+     * @param query
+     * @return 
      */
-    public void delete();
+    public int delete(String query);
 }

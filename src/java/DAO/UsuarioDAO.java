@@ -90,4 +90,24 @@ public class UsuarioDAO extends BaseDAO
             return null;
         }
     }
+    
+    public int delete(User user) 
+    {
+        try
+        {
+            this.query = String.format(
+                "DELETE FROM user " +
+                "WHERE id = %s",
+                user.getId()
+            );
+            
+            return super.delete(this.query);
+            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+    }
 }

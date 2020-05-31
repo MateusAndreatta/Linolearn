@@ -37,6 +37,7 @@ public class CadastroController extends HttpServlet {
         
         try 
         {
+            
             int idUser = usuarioDAO.create(user);
             user.setId(idUser);
             
@@ -48,7 +49,7 @@ public class CadastroController extends HttpServlet {
             int success = usuarioDAO.update(user);
             
             if (success > 0) 
-            {
+            { 
                 response.sendRedirect("Pages/login.jsp");
             } 
             else {
