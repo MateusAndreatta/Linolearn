@@ -13,27 +13,27 @@
                 <form class="col s12 card cadastro-form" method="post" action="../CadastroController">
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <input id="first_name" type="text" name="firstname" class="validate">
+                            <input id="first_name" type="text" name="firstname" class="validate" required>
                             <label for="first_name">Nome</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="last_name" type="text" name="lastname" class="validate">
+                            <input id="last_name" type="text" name="lastname" class="validate" required>
                             <label for="last_name">Sobrenome</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <input id="password" type="password" name="password" class="validate">
+                            <input id="password" type="password" name="password" class="validate" required>
                             <label for="password">Senha</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="email" type="email" name="email" class="validate">
+                            <input id="email" type="email" name="email" class="validate" required>
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <select name="role">
+                            <select name="role" required>
                                 <option value="" disabled selected>Perfil</option>
                                 <option value="1">Aluno</option>
                                 <option value="2">Professor</option>
