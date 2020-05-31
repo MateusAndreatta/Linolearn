@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Course;
+import static Util.FormatArgs.convertToQueryArg;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,9 +27,9 @@ public class CourseDAO extends BaseDAO
                     colunas,
                     // Valores
                     null,
-                    course.getName(),
-                    course.getDescription(),
-                    course.getImagePath(),
+                    convertToQueryArg(course.getName()),
+                    convertToQueryArg(course.getDescription()),
+                    convertToQueryArg(course.getImagePath()),
                     course.getPrice(),
                     course.getCashbackPercentage(),
                     course.getOwner()
@@ -43,34 +44,7 @@ public class CourseDAO extends BaseDAO
         }
     }
     
-    public int update(Course course) 
-    {
-        try 
-        {    
-            this.query = String.format(
-                    "UPDATE %s " +
-                    "SET name = %s, description = %s, image_path = %s, price = %s, cashback_percentage = %s " +
-                    "WHERE id = %s",
-                    this.nomeTabela,
-                    // Valores
-                    course.getName(),
-                    course.getDescription(),
-                    course.getImagePath(),
-                    course.getPrice(),
-                    course.getCashbackPercentage(),
-                    course.getId()
-            );
-            
-            return super.update(this.query);
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return -1;
-        }
-    }
-
-    public ResultSet read(int idCourse)
+    public ResultSet findById(int idCourse)
     {
         try 
         {    
@@ -90,8 +64,35 @@ public class CourseDAO extends BaseDAO
             return null;
         }
     }
+    
+    public int update(Course course) 
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "UPDATE %s " +
+                    "SET name = %s, description = %s, image_path = %s, price = %s, cashback_percentage = %s " +
+                    "WHERE id = %s",
+                    this.nomeTabela,
+                    // Valores
+                    convertToQueryArg(course.getName()),
+                    convertToQueryArg(course.getDescription()),
+                    convertToQueryArg(course.getImagePath()),
+                    course.getPrice(),
+                    course.getCashbackPercentage(),
+                    course.getId()
+            );
+            
+            return super.update(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+    }
 
-    public int delete(int idUser) 
+    public int delete(int idCourse) 
     {
         try
         {
@@ -100,7 +101,7 @@ public class CourseDAO extends BaseDAO
                     "WHERE id = %s",
                     this.nomeTabela,
                     // Valores
-                    idUser
+                    idCourse
             );
             
             return super.delete(this.query);

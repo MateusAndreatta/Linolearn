@@ -34,7 +34,7 @@ public class WalletDAO extends BaseDAO
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WalletDAO.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
     }
@@ -57,12 +57,12 @@ public class WalletDAO extends BaseDAO
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WalletDAO.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
     }
 
-    public ResultSet read(int idWallet)
+    public ResultSet findById(int idWallet)
     {
         try 
         {    
@@ -78,7 +78,7 @@ public class WalletDAO extends BaseDAO
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WalletDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

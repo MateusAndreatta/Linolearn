@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.UsuarioDAO;
+import DAO.UserDAO;
 import DAO.WalletDAO;
 import Model.User;
 import Model.Wallet;
@@ -32,7 +32,7 @@ public class CadastroController extends HttpServlet {
         
         Wallet wallet = new Wallet();
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        UserDAO usuarioDAO = new UserDAO();
         WalletDAO walletDAO = new WalletDAO();
         
         try 

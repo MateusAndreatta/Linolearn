@@ -1,11 +1,7 @@
 package UnityTest;
 
 import DAO.CourseDAO;
-import DAO.UsuarioDAO;
-import DAO.WalletDAO;
 import Model.Course;
-import Model.User;
-import Model.Wallet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -27,7 +23,7 @@ public class TestCourse
         
         c.setId(cd.create(c));
         
-        ResultSet rs = cd.read(c.getId());
+        ResultSet rs = cd.findById(c.getId());
                  
         while (rs.next())
         {
@@ -48,7 +44,7 @@ public class TestCourse
         
         cd.update(c);
         
-        rs = cd.read(c.getId());
+        rs = cd.findById(c.getId());
                  
         while (rs.next())
         {

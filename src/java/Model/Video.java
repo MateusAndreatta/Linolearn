@@ -12,6 +12,15 @@ public class Video extends BaseModel
     private String _path;
 
     public Video() { }
+    
+    public Video(int _courseId, String _name, 
+            String _description, String _path) 
+    {
+        this._courseId = _courseId;
+        this._name = _name;
+        this._description = _description;
+        this._path = _path;
+    }
 
     public Video(int _id, int _courseId, String _name, 
             String _description, String _path) 

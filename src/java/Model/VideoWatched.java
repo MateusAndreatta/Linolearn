@@ -8,6 +8,15 @@ public class VideoWatched extends BaseModel
     private String _finished;
 
     public VideoWatched() { }
+    
+    public VideoWatched(int _idUser, int _idVideo, int _courseId, 
+            String _finished) 
+    {
+        this._idUser = _idUser;
+        this._idVideo = _idVideo;
+        this._courseId = _courseId;
+        this._finished = _finished;
+    }
 
     public VideoWatched(int _id, int _idUser, int _idVideo, int _courseId, 
             String _finished) 

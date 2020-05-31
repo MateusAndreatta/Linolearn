@@ -1,6 +1,6 @@
 package UnityTest;
 
-import DAO.UsuarioDAO;
+import DAO.UserDAO;
 import DAO.WalletDAO;
 import Model.User;
 import Model.Wallet;
@@ -15,7 +15,7 @@ public class TestWallet
         User u = null;
         Wallet w = null;
         
-        UsuarioDAO ud = new UsuarioDAO();
+        UserDAO ud = new UserDAO();
         WalletDAO wd = new WalletDAO();
               
         ResultSet rs;
@@ -42,7 +42,7 @@ public class TestWallet
             );
         }
         
-        rsWall = wd.read(u.getWallet());
+        rsWall = wd.findById(u.getWallet());
         
         while (rsWall.next())
         {

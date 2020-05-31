@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.UsuarioDAO;
+import DAO.UserDAO;
 import Model.User;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 
     private User autenticar(String email, String password) {
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        UserDAO usuarioDAO = new UserDAO();
         ResultSet rs = usuarioDAO.findByEmail(email);
         try {
             while (rs.next()) {
