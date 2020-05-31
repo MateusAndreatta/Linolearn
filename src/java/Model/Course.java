@@ -11,6 +11,15 @@ public class Course extends BaseModel
 
     public Course() {
     }
+    
+    public Course(String _name, String _description, String _imagePath, Float _price, int _cashbackPercentage, int _owner) {
+        this._name = _name;
+        this._description = _description;
+        this._imagePath = _imagePath;
+        this._price = _price;
+        this._cashbackPercentage = _cashbackPercentage;
+        this._owner = _owner;
+    }
 
     public Course(int _id, String _name, String _description, String _imagePath, Float _price, int _cashbackPercentage, int _owner) {
         this._id = _id;
@@ -77,6 +86,13 @@ public class Course extends BaseModel
     public void setOwner(int _owner) {
         this._owner = _owner;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" + "_name=" + _name + ", _description=" + _description + ", _imagePath=" + _imagePath + ", _price=" + _price + ", _cashbackPercentage=" + _cashbackPercentage + ", _owner=" + _owner + '}';
+    }
+    
+    
 
     
 }

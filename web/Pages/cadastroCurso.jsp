@@ -11,36 +11,36 @@
         <div class="container">
             <div class="row">
                 <h2 class="center">Criar curso</h2>
-                <form class="col s12 card cadastro-form" method="post" action="../CadastroCursoController">
+                <form class="col s12 card cadastro-form" method="post" action="../CadastroCursoController" enctype = "multipart/form-data">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="nome" type="text" class="validate">
+                            <input id="nome" type="text" class="validate" name="nome" required>
                             <label for="nome">Nome</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="descricao" type="password" class="validate">
+                            <input id="descricao" type="text" class="validate" name="descricao" required>
                             <label for="descricao">Descricao</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <input id="preco" type="text" class="validate">
+                            <input id="preco" type="text" class="validate" name="preco" required>
                             <label for="preco">Preço</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="cashback" type="text" class="validate">
+                            <input id="cashback" type="text" class="validate" name="porcentagem" required>
                             <label for="cashback">Porcentagem de cashback</label>
                         </div>
                     </div>
                     <div class="file-field input-field">
                         <div class="btn">
                             <span>Capa do curso</span>
-                            <input type="file">
+                            <input type="file" name="capa" required>
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
+                            <input class="file-path validate" type="text" required>
                         </div>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Cadastrar
@@ -49,8 +49,6 @@
                 </form>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="../scripts/js.js"></script>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>
