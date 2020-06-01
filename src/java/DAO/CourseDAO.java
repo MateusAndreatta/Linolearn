@@ -65,6 +65,25 @@ public class CourseDAO extends BaseDAO
         }
     }
     
+    public ResultSet getAllCourses()
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * from %s ", 
+                    this.nomeTabela
+                    // Valores
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public int update(Course course) 
     {
         try 
