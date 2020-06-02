@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.CourseDAO;
 import Model.Course;
 import Model.User;
 import Util.Constants;
@@ -33,10 +34,10 @@ public class CadastroCursoController extends HttpServlet {
 
             User user = Global.getUser(request, response);
             if (Global.checkPermission(user, Constants.Role.PROFESSOR)) {
-                Course curse = new Course();
+                Course course = new Course();
                 FileItemFactory factory = new DiskFileItemFactory();
                 ServletFileUpload upload = new ServletFileUpload(factory);
-                curse.setOwner(user.getId());
+                course.setOwner(user.getId());
                 try {
                     // Parse the request
                     List items = upload.parseRequest(request);
@@ -55,26 +56,26 @@ public class CadastroCursoController extends HttpServlet {
                             File uploadedFile = new File(path + "/" + fileName);
                             System.out.println(uploadedFile.getAbsolutePath());
                             item.write(uploadedFile);
-                            curse.setImagePath(fileName);
+                            course.setImagePath(fileName);
                         } else {
 //                            String name = item.getFieldName();//text1
 //                            String value = item.getString();
                             switch (item.getFieldName()) {
                                 case "nome":
                                     System.out.println(item.getString());
-                                    curse.setName(item.getString());
+                                    course.setName(item.getString());
                                     break;
                                 case "descricao":
                                     System.out.println(item.getString());
-                                    curse.setDescription(item.getString());
+                                    course.setDescription(item.getString());
                                     break;
                                 case "preco":
                                     System.out.println(item.getString());
-                                    curse.setPrice(Float.parseFloat(item.getString()));
+                                    course.setPrice(Float.parseFloat(item.getString()));
                                     break;
                                 case "porcentagem":
                                     System.out.println(item.getString());
-                                    curse.setCashbackPercentage(Integer.parseInt(item.getString()));
+                                    course.setCashbackPercentage(Integer.parseInt(item.getString()));
                                     break;
                             }
                         }
@@ -85,7 +86,12 @@ public class CadastroCursoController extends HttpServlet {
                     e.printStackTrace();
                 }
                 //TODO o curso ja vem todo preenchido, basta apenas mandar ele na DAO para inserir no banco 
-                System.out.println(curse.toString());
+                try{
+                    CourseDAO courseDao = new CourseDAO();
+                    courseDao.create(course);
+                }catch(Exception ex){
+                    response.sendRedirect("Pages/erro.jsp");
+                }
                 
                 response.sendRedirect("Pages/meusCursos.jsp");
             } else {

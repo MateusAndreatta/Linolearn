@@ -16,6 +16,10 @@
         <servlet-name>CadastroCursoController</servlet-name>
         <servlet-class>Controller.CadastroCursoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WalletController</servlet-name>
+        <servlet-class>Controller.WalletController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CadastroCursoController</servlet-name>
         <url-pattern>/CadastroCursoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WalletController</servlet-name>
+        <url-pattern>/WalletController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

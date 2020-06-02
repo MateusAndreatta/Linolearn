@@ -10,14 +10,29 @@
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="row">
-                <form class="col s12 card" method="POST" action="../depositoController">
+                <form class="col s12 card" method="POST" action="../WalletController">
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">attach_money</i>
-                            <input id="icon_prefix2" type="number" class="balidate"/>
+                            <input id="icon_prefix2" type="number" name="valor" class="validate" required/>
                             <label for="icon_prefix2">Valor do deposito</label>
                         </div>
+                        <input id="icon_prefix2" type="hidden" class="validate" value="deposito"/>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Realizar deposito
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+
+                <form class="col s12 card" method="POST" action="../WalletController">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">attach_money</i>
+                            <input id="icon_prefix2" type="number" name="valor" class="validate" required/>
+                            <label for="icon_prefix2">Valor da retirada</label>
+                        </div>
+                        <input id="icon_prefix2" type="hidden" class="validate" value="deposito"/>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Solicitar retirada
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -26,6 +41,6 @@
         </div>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="../scripts/js.js"></script>
+        <script src="../scripts/js.js"></script>    
     </body>
 </html>
