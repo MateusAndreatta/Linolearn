@@ -1,3 +1,5 @@
+<%@page import="Model.Video"%>
+<%@page import="java.util.List"%>
 <%@page import="Model.Course"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,27 +27,19 @@
                 <div class="col s12">
                     <h4>Aulas</h4>
                     <ul class="collapsible">
+                        <%
+                            for (Video v : (List<Video>) request.getSession().getAttribute("videos")) {
+                        %>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i><% out.print(v.getName());%></div>
                             <div class="collapsible-body">
-                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span><% out.print(v.getDescription());%></span>
                                 <a href="aula.jsp">Assitir a aula</a>
                             </div>
                         </li>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                            <div class="collapsible-body">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <a href="aula.jsp">Assitir a aula</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                            <div class="collapsible-body">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <a href="aula.jsp">Assitir a aula</a>
-                            </div>
-                        </li>
+                        <%
+                            }
+                        %>
                     </ul>
                 </div>
             </div>

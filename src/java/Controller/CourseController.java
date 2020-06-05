@@ -1,14 +1,13 @@
 package Controller;
 
 import DAO.CourseDAO;
+import DAO.VideoDAO;
 import Model.Course;
-import Model.User;
-import java.io.File;
+import Model.Video;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +28,11 @@ public class CourseController extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("course", getCourse(Integer.parseInt(parameter)));
+        session.setAttribute("videos", getVideos(Integer.parseInt(parameter)));
 
         //manda o curso, porem mantem a url errada e isso causa outros erros
 //        request.setAttribute("course", getCourse(Integer.parseInt(parameter)));
 //        request.getRequestDispatcher("Pages/curso.jsp").forward(request, response);
-
 //        
         //vai com a url certa, mas nao consegue mandar o curso
         response.sendRedirect("Pages/curso.jsp");
@@ -66,4 +65,24 @@ public class CourseController extends HttpServlet {
         return course;
     }
 
+    private List<Video> getVideos(int id) {
+        List<Video> list = new ArrayList();
+        try {
+            VideoDAO videoDao = new VideoDAO();
+            ResultSet rs = videoDao.findAllVideosByCourseId(id);
+
+            while (rs.next()) {
+                Video video = new Video();
+                video.setId(rs.getInt("id"));
+                video.setCourseId(rs.getInt("course_id"));
+                video.setName(rs.getString("name"));
+                video.setDescription(rs.getString("description"));
+                video.setPath(rs.getString("path"));
+                list.add(video);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
 }
