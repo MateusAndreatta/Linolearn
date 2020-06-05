@@ -24,7 +24,6 @@ public class CourseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String parameter = request.getParameter("id");
-        System.out.println(parameter);
 
         HttpSession session = request.getSession();
         session.setAttribute("course", getCourse(Integer.parseInt(parameter)));

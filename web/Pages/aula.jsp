@@ -1,3 +1,4 @@
+<%@page import="Model.Video"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,16 +9,17 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
+        <% Video video = (Video) session.getAttribute("video");%>
         <div class="container">
             <div class="row card">
                 <div class="col s12">
                     <iframe id="ytplayer" type="text/html" width="640" height="360"
-                            src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1"
+                            src="https://www.youtube.com/embed/<% out.print(video.getPath());%>?autoplay=1"
                             frameborder="0"></iframe>
                 </div>
                 <div class="col s12 m7">
-                    <h4>Aula 01</h4>
-                    <p>Nessa aula vemos sobre CRUD com jsp</p>
+                    <h4><% out.print(video.getName());%></h4>
+                    <p><% out.print(video.getDescription());%></p>
                     <button class="btn">Concluir</button>
                 </div>
             </div>
