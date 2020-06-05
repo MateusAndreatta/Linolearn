@@ -70,7 +70,7 @@ public class CourseDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "SELECT * from %s ", 
+                    "SELECT * FROM %s ", 
                     this.nomeTabela
                     // Valores
             );

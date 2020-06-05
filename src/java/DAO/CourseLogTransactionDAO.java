@@ -50,11 +50,35 @@ public class CourseLogTransactionDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "SELECT * from %s " +
+                    "SELECT * FROM %s " +
                     "WHERE buyer = %s",
                     this.nomeTabela,
                     // Valores
                     idUser
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(CourseLogTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public ResultSet userHasBuyed(int idUser, int courseId)
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * FROM %s " +
+                    "WHERE buyer = %s " +
+                    "AND courseId = %s ",
+                    
+                    this.nomeTabela,
+                    // Valores
+                    idUser,
+                    courseId
             );
             
             return super.read(this.query);
@@ -71,7 +95,7 @@ public class CourseLogTransactionDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "SELECT * from %s " +
+                    "SELECT * FROM %s " +
                     "WHERE seller = %s",
                     this.nomeTabela,
                     // Valores
@@ -86,4 +110,5 @@ public class CourseLogTransactionDAO extends BaseDAO
             return null;
         }
     }
+    
 }
