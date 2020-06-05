@@ -58,8 +58,6 @@ public class CadastroCursoController extends HttpServlet {
                             item.write(uploadedFile);
                             course.setImagePath(fileName);
                         } else {
-//                            String name = item.getFieldName();//text1
-//                            String value = item.getString();
                             switch (item.getFieldName()) {
                                 case "nome":
                                     System.out.println(item.getString());

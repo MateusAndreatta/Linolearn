@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="Model.Course"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,120 +11,31 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-        <h3>Olá ${sessionScope.user.getFirstName()}</h3>
+            <h3>Olá ${sessionScope.user.getFirstName()}</h3>
             <div class="row">
+
+                <%
+                    for (Course c : (List<Course>) request.getSession().getAttribute("cursos")) {
+                %>
+
                 <div class="col s12 m3">
                     <div class="card">
                         <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
+                            <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
+                            <span class="card-title"><%out.print(c.getName());%></span>
                         </div>
                         <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
+                            <p><%out.print(c.getDescription());%></p>
                         </div>
                         <div class="card-action">
                             <a href="curso.jsp">Ver curso</a>
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://picsum.photos/200">
-                            <span class="card-title">Curso Javascript</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Curso muito bom sobre JS, uma das linguagens mais ultilizadas em toda a WEB!.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
-                        </div>
-                    </div>
-                </div>
+
+                <%
+                    }
+                %>
             </div>
 
         </div>
