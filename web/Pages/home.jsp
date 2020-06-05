@@ -28,7 +28,8 @@
                             <p><%out.print(c.getDescription());%></p>
                         </div>
                         <div class="card-action">
-                            <a href="curso.jsp">Ver curso</a>
+                            <!--<a href="curso.jsp">Ver curso</a>-->
+                            <a href="../CourseController?id=<%out.print(c.getId());%>">Ver curso</a>
                         </div>
                     </div>
                 </div>

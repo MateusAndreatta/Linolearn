@@ -1,3 +1,4 @@
+<%@page import="Model.Course"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,14 +9,15 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
+        <% Course curso = (Course) session.getAttribute("course");%>
         <div class="container">
             <div class="row card">
                 <div class="col s12 m5">
-                    <img src="https://picsum.photos/400">
+                    <img src="../imgs/uploads/<% out.print(curso.getImagePath());%>">
                 </div>
                 <div class="col s12 m7">
-                    <h4>Nome do curso</h4>
-                    <h5>Descricao do curso</h5>
+                    <h4><% out.print(curso.getName());%></h4>
+                    <h5><% out.print(curso.getDescription());%></h5>
                     <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">a
                         <div class="determinate" style="width: 70%"></div>
                     </div>

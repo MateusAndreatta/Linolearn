@@ -4,10 +4,8 @@ import DAO.CourseDAO;
 import DAO.UserDAO;
 import Model.Course;
 import Model.User;
-import Util.Global;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +82,7 @@ public class LoginController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
+        
         return list;
     }
 }

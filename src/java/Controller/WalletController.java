@@ -23,7 +23,5 @@ public class WalletController extends HttpServlet {
         request.getParameter("wallet");
         
     }
-    
-    
 
 }
