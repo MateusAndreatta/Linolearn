@@ -1,3 +1,4 @@
+<%@page import="Model.User"%>
 <%@page import="Model.Video"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.Course"%>
@@ -23,6 +24,14 @@
                     <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">a
                         <div class="determinate" style="width: 70%"></div>
                     </div>
+                    <!--SE O usuario ja comprou o curso nao precisa mostrar esse forms-->
+                    <form method="post" action="">
+                        <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Comprar curso
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+
                 </div>
                 <div class="col s12">
                     <h4>Aulas</h4>
