@@ -34,7 +34,7 @@
                             <div class="collapsible-header"><i class="material-icons">filter_drama</i><% out.print(v.getName());%></div>
                             <div class="collapsible-body">
                                 <span><% out.print(v.getDescription());%></span>
-                                <a href="aula.jsp">Assitir a aula</a>
+                                <a href="../VideoController?id=<%out.print(v.getId());%>">Assitir a aula</a>
                             </div>
                         </li>
                         <%
