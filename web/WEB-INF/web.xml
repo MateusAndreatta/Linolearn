@@ -28,6 +28,10 @@
         <servlet-name>VideoController</servlet-name>
         <servlet-class>Controller.VideoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyCourseController</servlet-name>
+        <servlet-class>Controller.MyCourseController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>VideoController</servlet-name>
         <url-pattern>/VideoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyCourseController</servlet-name>
+        <url-pattern>/MyCourseController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
