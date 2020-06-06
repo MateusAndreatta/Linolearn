@@ -171,7 +171,7 @@ CREATE TABLE `video_watched` (
 CREATE TABLE `wallet` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
-  `amount` float NOT NULL DEFAULT 0
+  `amount` float NOT NULL DEFAULT 0,
   `coin` float NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -179,7 +179,7 @@ CREATE TABLE `wallet` (
 -- Extraindo dados da tabela `wallet`
 --
 
-INSERT INTO `wallet` (`id`, `user`, `amount`) VALUES
+INSERT INTO `wallet` (`id`, `user`, `amount`,`coin`) VALUES
 (1, 1, 0,0),
 (2, 4, 50.51,0);
 
