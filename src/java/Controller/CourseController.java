@@ -127,7 +127,7 @@ public class CourseController extends HttpServlet {
 
                 walletDAO.update(wallet);
 
-                response.sendRedirect("Pages/meusCursos.jsp");
+                response.sendRedirect("MyCourseController");
 
             } else {
                 response.sendRedirect("Pages/curso.jsp?erro=2");
