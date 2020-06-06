@@ -12,7 +12,7 @@ public class WalletDAO extends BaseDAO
     public WalletDAO() 
     {
         this.conexao = Conexao.getInstance();
-        this.colunas = "id, user, amount";
+        this.colunas = "id, user, amount, coin";
         this.nomeTabela = "wallet";
     }
     
@@ -21,12 +21,13 @@ public class WalletDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "INSERT INTO %s (%s) VALUES (%s, %s, %s)",
+                    "INSERT INTO %s (%s) VALUES (%s, %s, %s, %s)",
                     this.nomeTabela,
                     colunas,
                     // Valores
                     null,
                     wallet.getUser(),
+                    0.00f,
                     0.00f
             );
             
@@ -46,10 +47,12 @@ public class WalletDAO extends BaseDAO
             this.query = String.format(
                     "UPDATE %s " +
                     "SET amount = %s " +
+                    "SET coin = %s " +
                     "WHERE id = %s",
                     this.nomeTabela,
                     // Valores
                     wallet.getAmount(),
+                    wallet.getCoin(),
                     wallet.getId()
             );
             
