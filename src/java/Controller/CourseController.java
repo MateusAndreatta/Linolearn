@@ -90,7 +90,7 @@ public class CourseController extends HttpServlet {
 
                 if (valorRestante < 0) 
                 {
-                    valorRestante += valorNaCarteira;
+                    valorNaCarteira += valorRestante;
                     valorComCoin = 0;
                 } 
                 else 
@@ -135,13 +135,13 @@ public class CourseController extends HttpServlet {
             } 
             else 
             {
-                response.sendRedirect("Pages/course.jsp?erro=2");
+                response.sendRedirect("Pages/curso.jsp?erro=2");
             }
             
         } 
         catch (IOException | NumberFormatException | SQLException e)
         {
-            response.sendRedirect("Pages/course.jsp?erro=1");
+            response.sendRedirect("Pages/curso.jsp?erro=1");
         }
     }
 
