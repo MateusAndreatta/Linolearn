@@ -13,6 +13,8 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <% Course curso = (Course) session.getAttribute("course");%>
+        <% Boolean buyed = (Boolean) session.getAttribute("buyed");%>
+
         <div class="container">
             <div class="row card">
                 <div class="col s12 m5">
@@ -24,9 +26,12 @@
                     <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">a
                         <div class="determinate" style="width: 70%"></div>
                     </div>
-                    <!--SE O usuario ja comprou o curso nao precisa mostrar esse forms-->
+
+                    <%
+                        if (!buyed) {
+                    %>
                     <form method="post" action="../CourseController">
-                        
+
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
                         <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
@@ -36,6 +41,10 @@
                             <i class="material-icons right">send</i>
                         </button>
                     </form>
+                    <%
+                        }
+                    %>
+
 
                 </div>
                 <div class="col s12">
@@ -48,7 +57,13 @@
                             <div class="collapsible-header"><i class="material-icons">filter_drama</i><% out.print(v.getName());%></div>
                             <div class="collapsible-body">
                                 <span><% out.print(v.getDescription());%></span>
+                                <%
+                                    if (buyed) {
+                                %>
                                 <a href="../VideoController?id=<%out.print(v.getId());%>">Assitir a aula</a>
+                                <%
+                                    }
+                                %>
                             </div>
                         </li>
                         <%
@@ -59,5 +74,15 @@
             </div>
         </div>
         <jsp:include page="footer.jsp" />
+                <%
+        if(request.getParameter("erro") != null){
+        
+            %>
+        <script>
+                 M.toast({html: 'Não foi possivel comprar o curso'});
+        </script>
+            <%
+        }
+        %>
     </body>
 </html>

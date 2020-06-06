@@ -72,7 +72,7 @@ public class CourseLogTransactionDAO extends BaseDAO
             this.query = String.format(
                     "SELECT * FROM %s " +
                     "WHERE buyer = %s " +
-                    "AND courseId = %s ",
+                    "AND course_id = %s ",
                     
                     this.nomeTabela,
                     // Valores
