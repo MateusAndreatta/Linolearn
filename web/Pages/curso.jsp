@@ -33,9 +33,30 @@
                     <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou <%out.print(porcentagem);%>% do curso!">a
                         <div class="determinate" style="width: <%out.print(porcentagem);%>%"></div>
                     </div>
+
+
+                    <%
+                        if (porcentagem == 100.0f) {
+                    %>
+                    <form method="post" action="">
+                        <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
+                        <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
+                        <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
+                        <input type="hidden" name="coursePercentage" value="<%out.print(curso.getCashbackPercentage());%>">
+
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Resgatar linocoins!
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
                     <%
                         }
                     %>
+
+
+                    <%
+                        }
+                    %>
+
 
                     <%
                         if (!buyed) {
