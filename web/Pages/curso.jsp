@@ -24,9 +24,18 @@
                 <div class="col s12 m7">
                     <h4><% out.print(curso.getName());%></h4>
                     <h5><% out.print(curso.getDescription());%></h5>
-                    <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou 70% do curso!">a
-                        <div class="determinate" style="width: 70%"></div>
+                    <%
+                        if (buyed) {
+                            List<Video> v = (List<Video>) request.getSession().getAttribute("videos");
+                            List<VideoWatched> vw = (List<VideoWatched>) request.getSession().getAttribute("videosWatched");
+                            float porcentagem = (vw.size() * 100) / v.size();
+                    %>
+                    <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou <%out.print(porcentagem);%>% do curso!">a
+                        <div class="determinate" style="width: <%out.print(porcentagem);%>%"></div>
                     </div>
+                    <%
+                        }
+                    %>
 
                     <%
                         if (!buyed) {
