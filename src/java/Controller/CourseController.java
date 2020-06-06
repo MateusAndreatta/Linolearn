@@ -35,9 +35,14 @@ public class CourseController extends HttpServlet {
             throws ServletException, IOException {
         String parameter = request.getParameter("id");
 
+        
         HttpSession session = request.getSession();
-        session.setAttribute("course", getCourse(Integer.parseInt(parameter)));
+        
+        User user = Global.getUser(request, response);
+        Course course = getCourse(Integer.parseInt(parameter));
+        session.setAttribute("course", course);
         session.setAttribute("videos", getVideos(Integer.parseInt(parameter)));
+        session.setAttribute("buyed", userHasBuyed(user.getId(), course.getId()));
 
         //manda o curso, porem mantem a url errada e isso causa outros erros
 //        request.setAttribute("course", getCourse(Integer.parseInt(parameter)));
@@ -180,5 +185,19 @@ public class CourseController extends HttpServlet {
             ex.printStackTrace();
         }
         return list;
+    }
+    
+        private boolean userHasBuyed(int idUser, int idCourse) {
+        boolean comprou = false;
+        try {
+            CourseLogTransactionDAO courseLog = new CourseLogTransactionDAO();
+            ResultSet rs = courseLog.userHasBuyed(idUser, idCourse);
+            while (rs.next()) {
+                comprou = true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return comprou;
     }
 }

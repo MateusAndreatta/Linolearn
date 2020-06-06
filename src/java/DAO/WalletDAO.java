@@ -46,7 +46,8 @@ public class WalletDAO extends BaseDAO
         {    
             this.query = String.format(
                     "UPDATE %s " +
-                    "SET amount = %s, coin = %s " +
+                    "SET amount = %s " +
+                    "SET coin = %s " +
                     "WHERE id = %s",
                     this.nomeTabela,
                     // Valores
