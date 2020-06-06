@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.CourseDAO;
 import DAO.CourseLogTransactionDAO;
-import DAO.UserDAO;
 import DAO.VideoDAO;
 import DAO.VideoWatchedDAO;
 import DAO.WalletDAO;
@@ -18,10 +17,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +41,6 @@ public class CourseController extends HttpServlet {
         session.setAttribute("videos", getVideos(Integer.parseInt(parameter)));
         session.setAttribute("buyed", userHasBuyed(user.getId(), course.getId()));
         session.setAttribute("videosWatched", getVideosWatched(user.getId(), course.getId()));
-
-        //manda o curso, porem mantem a url errada e isso causa outros erros
-//        request.setAttribute("course", getCourse(Integer.parseInt(parameter)));
-//        request.getRequestDispatcher("Pages/curso.jsp").forward(request, response);
-//        
-        //vai com a url certa, mas nao consegue mandar o curso
         response.sendRedirect("Pages/curso.jsp");
     }
 

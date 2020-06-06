@@ -4,6 +4,7 @@ import DAO.CourseDAO;
 import DAO.UserDAO;
 import Model.Course;
 import Model.User;
+import Util.Global;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = Global.getUser(request, response);
         HttpSession session = request.getSession();
         session.setAttribute("cursos", getCourse());
         response.sendRedirect("Pages/home.jsp");
@@ -36,29 +38,6 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-    }
-
-    private User getUser(String email) {
-
-        UserDAO usuarioDAO = new UserDAO();
-        ResultSet rs = usuarioDAO.findByEmail(email);
-        try {
-            while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getInt("role"));
-                user.setWallet(rs.getInt("wallet"));
-                return user;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-        return null;
     }
 
     private List<Course> getCourse() {
