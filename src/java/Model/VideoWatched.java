@@ -5,7 +5,6 @@ public class VideoWatched extends BaseModel
     private int _idUser;
     private int _idVideo;
     private int _courseId;
-    private String _finished;
 
     public VideoWatched() { }
     
@@ -15,7 +14,6 @@ public class VideoWatched extends BaseModel
         this._idUser = _idUser;
         this._idVideo = _idVideo;
         this._courseId = _courseId;
-        this._finished = _finished;
     }
 
     public VideoWatched(int _id, int _idUser, int _idVideo, int _courseId, 
@@ -25,7 +23,6 @@ public class VideoWatched extends BaseModel
         this._idUser = _idUser;
         this._idVideo = _idVideo;
         this._courseId = _courseId;
-        this._finished = _finished;
     }
 
     public int getId() {
@@ -60,11 +57,4 @@ public class VideoWatched extends BaseModel
         this._courseId = _courseId;
     }
 
-    public String getFinished() {
-        return _finished;
-    }
-
-    public void setFinished(String _finished) {
-        this._finished = _finished;
-    }
 }

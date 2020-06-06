@@ -1,3 +1,5 @@
+<%@page import="Model.VideoWatched"%>
+<%@page import="java.util.List"%>
 <%@page import="Model.Video"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +12,14 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <% Video video = (Video) session.getAttribute("video");%>
+        <%
+            boolean watched = false;
+            for (VideoWatched vw : (List<VideoWatched>) request.getSession().getAttribute("videosWatched")) {
+                if (vw.getIdVideo() == video.getId()) {
+                    watched = true;
+                }
+            }
+        %>
         <div class="container">
             <div class="row card">
                 <div class="col s12">
@@ -20,7 +30,22 @@
                 <div class="col s12 m7">
                     <h4><% out.print(video.getName());%></h4>
                     <p><% out.print(video.getDescription());%></p>
-                    <button class="btn">Concluir</button>
+                    <form method="post" action="../VideoController">
+
+                        <input type="hidden" name="videoId" value="<%out.print(video.getId());%>">
+                        <input type="hidden" name="courseId" value="<%out.print(video.getCourseId());%>">
+                        <%
+                            if (watched) {
+                        %>
+                        <button class="btn waves-effect waves-light disabled"  type="submit" name="action">Concluir
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <%} else {%>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Concluir
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <%}%>
+                    </form>
                 </div>
             </div>
         </div>

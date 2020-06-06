@@ -12,7 +12,7 @@ public class VideoWatchedDAO extends BaseDAO
     public VideoWatchedDAO() 
     {
         this.conexao = Conexao.getInstance();
-        this.colunas = "id, id_user, id_video, course_id, finished";
+        this.colunas = "id, id_user, id_video, course_id";
         this.nomeTabela = "video_watched";
     }
     
@@ -21,15 +21,14 @@ public class VideoWatchedDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "INSERT INTO %s (%s) VALUES (%s, %s, %s, %s, %s)",
+                    "INSERT INTO %s (%s) VALUES (%s, %s, %s, %s)",
                     this.nomeTabela,
                     colunas,
                     // Valores
                     null,
                     videoWatched.getIdUser(),
                     videoWatched.getIdVideo(),
-                    videoWatched.getCourseId(),
-                    null
+                    videoWatched.getCourseId()
             );
             
             return super.create(this.query);

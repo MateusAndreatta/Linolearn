@@ -1,3 +1,4 @@
+<%@page import="Model.VideoWatched"%>
 <%@page import="Model.User"%>
 <%@page import="Model.Video"%>
 <%@page import="java.util.List"%>
@@ -52,9 +53,26 @@
                     <ul class="collapsible">
                         <%
                             for (Video v : (List<Video>) request.getSession().getAttribute("videos")) {
+                                boolean watched = false;
+                                for (VideoWatched vw : (List<VideoWatched>) request.getSession().getAttribute("videosWatched")) {
+                                    if (vw.getIdVideo() == v.getId()) {
+                                        watched = true;
+                                    }
+                                }
                         %>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i><% out.print(v.getName());%></div>
+                            <%
+                                if (watched) {
+                            %>
+                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%></div>
+                            <%
+                            } else {
+                            %>
+                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%></div>
+                            <%
+                                }
+                            %>
+
                             <div class="collapsible-body">
                                 <span><% out.print(v.getDescription());%></span>
                                 <%
@@ -74,15 +92,14 @@
             </div>
         </div>
         <jsp:include page="footer.jsp" />
-                <%
-        if(request.getParameter("erro") != null){
-        
-            %>
+        <%
+            if (request.getParameter("erro") != null) {
+
+        %>
         <script>
-                 M.toast({html: 'Não foi possivel comprar o curso'});
+            M.toast({html: 'Não foi possivel comprar o curso'});
         </script>
-            <%
-        }
+        <%                }
         %>
     </body>
 </html>

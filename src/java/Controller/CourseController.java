@@ -4,11 +4,13 @@ import DAO.CourseDAO;
 import DAO.CourseLogTransactionDAO;
 import DAO.UserDAO;
 import DAO.VideoDAO;
+import DAO.VideoWatchedDAO;
 import DAO.WalletDAO;
 import Model.Course;
 import Model.CourseLogTransaction;
 import Model.User;
 import Model.Video;
+import Model.VideoWatched;
 import Model.Wallet;
 import Util.Constants;
 import Util.Global;
@@ -35,14 +37,14 @@ public class CourseController extends HttpServlet {
             throws ServletException, IOException {
         String parameter = request.getParameter("id");
 
-        
         HttpSession session = request.getSession();
-        
+
         User user = Global.getUser(request, response);
         Course course = getCourse(Integer.parseInt(parameter));
         session.setAttribute("course", course);
         session.setAttribute("videos", getVideos(Integer.parseInt(parameter)));
         session.setAttribute("buyed", userHasBuyed(user.getId(), course.getId()));
+        session.setAttribute("videosWatched", getVideosWatched(user.getId(), course.getId()));
 
         //manda o curso, porem mantem a url errada e isso causa outros erros
 //        request.setAttribute("course", getCourse(Integer.parseInt(parameter)));
@@ -65,7 +67,7 @@ public class CourseController extends HttpServlet {
             Wallet wallet = new Wallet();
 
             ResultSet rs = walletDAO.findById(user.getWallet());
-            
+
             rs.next();
 
             float valorPrecoCurso = 0.0f;
@@ -75,7 +77,6 @@ public class CourseController extends HttpServlet {
             int cashback = 0;
             float valorRetorno = 0;
 
-            
             valorNaCarteira = rs.getFloat("amount");
             valorComCoin = rs.getFloat("coin");
             valorPrecoCurso = Float.parseFloat(request.getParameter("coursePrice"));
@@ -84,17 +85,13 @@ public class CourseController extends HttpServlet {
 
             valorRetorno = valorPrecoCurso / 100 * cashback;
 
-            if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) 
-            {
+            if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) {
                 valorRestante = valorComCoin - valorPrecoCurso;
 
-                if (valorRestante < 0) 
-                {
+                if (valorRestante < 0) {
                     valorNaCarteira += valorRestante;
                     valorComCoin = 0;
-                } 
-                else 
-                {
+                } else {
                     valorComCoin -= valorPrecoCurso;
                     valorNaCarteira += valorRetorno;
                 }
@@ -120,27 +117,23 @@ public class CourseController extends HttpServlet {
                 log.create(cl);
 
                 rs = walletDAO.findByUserId(Integer.parseInt(request.getParameter("courseOwner")));
-                
+
                 rs.next();
-                
+
                 wallet.setAmount(rs.getFloat("amount") + valorPrecoCurso);
                 wallet.setCoin(rs.getFloat("coin"));
                 wallet.setId(rs.getInt("id"));
                 wallet.setUser(rs.getInt("user"));
-                
+
                 walletDAO.update(wallet);
 
                 response.sendRedirect("Pages/meusCursos.jsp");
 
-            } 
-            else 
-            {
+            } else {
                 response.sendRedirect("Pages/curso.jsp?erro=2");
             }
-            
-        } 
-        catch (IOException | NumberFormatException | SQLException e)
-        {
+
+        } catch (IOException | NumberFormatException | SQLException e) {
             response.sendRedirect("Pages/curso.jsp?erro=1");
         }
     }
@@ -186,8 +179,8 @@ public class CourseController extends HttpServlet {
         }
         return list;
     }
-    
-        private boolean userHasBuyed(int idUser, int idCourse) {
+
+    private boolean userHasBuyed(int idUser, int idCourse) {
         boolean comprou = false;
         try {
             CourseLogTransactionDAO courseLog = new CourseLogTransactionDAO();
@@ -199,5 +192,25 @@ public class CourseController extends HttpServlet {
             ex.printStackTrace();
         }
         return comprou;
+    }
+
+    private List<VideoWatched> getVideosWatched(int idUser, int idCourse) {
+        List<VideoWatched> list = new ArrayList();
+        try {
+            VideoWatchedDAO videoDao = new VideoWatchedDAO();
+            ResultSet rs = videoDao.getAllWatchedVideosByCourseIdAndUserId(idCourse, idUser);
+
+            while (rs.next()) {
+                VideoWatched video = new VideoWatched();
+                video.setId(rs.getInt("id"));
+                video.setCourseId(rs.getInt("course_id"));
+                video.setIdVideo(rs.getInt("id_video"));
+                video.setIdUser(rs.getInt("id_user"));
+                list.add(video);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
     }
 }

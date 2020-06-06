@@ -1,16 +1,24 @@
 package Controller;
 
 import DAO.VideoDAO;
+import DAO.VideoWatchedDAO;
+import Model.User;
 import Model.Video;
+import Model.VideoWatched;
+import Util.Global;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  *
@@ -30,7 +38,25 @@ public class VideoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
+        String parameter = request.getParameter("videoId");
+        VideoWatched videoWatched = new VideoWatched();
+        User user = Global.getUser(request, response);
+        videoWatched.setIdVideo(Integer.parseInt(parameter));
+        videoWatched.setCourseId(Integer.parseInt(request.getParameter("courseId")));
+        videoWatched.setIdUser(user.getId());
+
+        VideoWatchedDAO vwdao = new VideoWatchedDAO();
+        try {
+            vwdao.create(videoWatched);
+            List<VideoWatched> list = (List<VideoWatched>) session.getAttribute("videosWatched");
+            list.add(videoWatched);
+            session.setAttribute("videosWatched", list);
+            response.sendRedirect("Pages/curso.jsp");
+        } catch (SQLException ex) {
+            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private Video getVideo(int id) {
