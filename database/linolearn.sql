@@ -47,8 +47,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
-(1, 'Aprenda Java na prática!', 'Aprenda Java com o maior deus de todos os javeiros: Andreatta! Neste curso você deixará de ser um programador ruim e será um programador bom usando Springboot e Spring MVC.', NULL, 19.99, 35, 4);
-
+(1, 'Curso de HTML5', 'Aprenda tudo sobre HTML5, nesse curso você irá criar um site completo - by Gustavo Guanabara', 'cursohtml5.png', 19.99, 15, 4);
 -- --------------------------------------------------------
 
 --
@@ -149,6 +148,13 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
+
+
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (null, 1, 'Introdução', 'HTML5 é uma linguagem de marcação hipertexto utilizada para criar sites. A versão 5 da linguagem foi homologada e lançada a partir de 2009, mas só ganhou mercado no final de 2012 com o surgimento dos grandes navegadores compatíveis.', 'epDCjksKMok');
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (null, 1, 'História da Internet', 'Nesta primeira aula, aprenda como a Internet surgiu e evoluiu até o que temos hoje em dia. Um apanhado geral de todos os inventores e invenções que fizeram parte da evolução da maior rede mundial.', 'rsFCVjr5yxc');
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (null, 1, 'História da HTML', 'Você sabe como surgiu a linguagem HTML? Conhece a evolução desde a HTML1 até HTML5? Sabe quais são as principais funções W3C? Veja nessa aula a resposta para todas essas perguntas e muito mais.', 'NSmapCNcSyI');
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (null, 1, 'Como Funciona a Internet', 'Aula do Curso de HTML5 criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.', 'LMfeZ6XD0No');
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (null, 1, 'Primeiro Exemplo em HTML5', 'Aula 100% prática de HTML5 com CSS3. Conheça as tags básicas e saiba como criar um documento no novo padrão.', 'yCSSsBNBzso');
 
 --
 -- Estrutura da tabela `video_watched`

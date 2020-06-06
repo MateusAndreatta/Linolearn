@@ -15,6 +15,7 @@
         <jsp:include page="navbar.jsp" />
         <% Course curso = (Course) session.getAttribute("course");%>
         <% Boolean buyed = (Boolean) session.getAttribute("buyed");%>
+        <% User user = (User) session.getAttribute("user");%>
 
         <div class="container">
             <div class="row card">
@@ -118,6 +119,14 @@
                             }
                         %>
                     </ul>
+                    <%
+                        if (user.getId() == curso.getOwner()) {
+                    %>
+                    <a class="waves-effect waves-light btn" href="cadastroAula.jsp?id=<%out.print(curso.getId());%>">Cadastrar aulas</a>
+                    <%
+                        }
+                    %>
+
                 </div>
             </div>
         </div>
