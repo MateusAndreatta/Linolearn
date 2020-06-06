@@ -25,7 +25,7 @@
                         <div class="determinate" style="width: 70%"></div>
                     </div>
                     <!--SE O usuario ja comprou o curso nao precisa mostrar esse forms-->
-                    <form method="post" action="../CadastroCursoController">
+                    <form method="post" action="../CourseController">
                         
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">

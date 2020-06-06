@@ -12,7 +12,7 @@ public class CourseLogTransactionDAO extends BaseDAO
     public CourseLogTransactionDAO() 
     {
         this.conexao = Conexao.getInstance();
-        this.colunas = "id, buyer, seller, course_id, course_price, cashback_percentage, amount_cashback, payment_status, date";
+        this.colunas = "id, buyer, seller, course_id, course_price, cashback_percentage, amount_cashback, payment_status";
         this.nomeTabela = "course_log_transaction";
     }
     
@@ -21,7 +21,7 @@ public class CourseLogTransactionDAO extends BaseDAO
         try 
         {    
             this.query = String.format(
-                    "INSERT INTO %s (%s) VALUES (%s, %s, %s, %s, %s)",
+                    "INSERT INTO %s (%s) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
                     this.nomeTabela,
                     colunas,
                     // Valores
@@ -32,8 +32,7 @@ public class CourseLogTransactionDAO extends BaseDAO
                     courseLogTransaction.getCoursePrice(),
                     courseLogTransaction.getCashbackPercentage(),
                     courseLogTransaction.getAmountCashback(),
-                    courseLogTransaction.getPaymentStatus(),
-                    null
+                    courseLogTransaction.getPaymentStatus()
             );
             
             return super.create(this.query);

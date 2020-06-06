@@ -60,6 +60,8 @@ public class CourseController extends HttpServlet {
             Wallet wallet = new Wallet();
 
             ResultSet rs = walletDAO.findById(user.getWallet());
+            
+            rs.next();
 
             float valorPrecoCurso = 0.0f;
             float valorNaCarteira = 0.0f;
@@ -77,7 +79,8 @@ public class CourseController extends HttpServlet {
 
             valorRetorno = valorPrecoCurso / 100 * cashback;
 
-            if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) {
+            if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) 
+            {
                 valorRestante = valorComCoin - valorPrecoCurso;
 
                 if (valorRestante < 0) 
@@ -87,11 +90,12 @@ public class CourseController extends HttpServlet {
                 } 
                 else 
                 {
-                    valorRestante += valorNaCarteira;
+                    valorComCoin -= valorPrecoCurso;
+                    valorNaCarteira += valorRetorno;
                 }
 
                 wallet.setCoin(valorComCoin);
-                wallet.setAmount(valorRestante);
+                wallet.setAmount(valorNaCarteira);
                 wallet.setId(user.getWallet());
                 wallet.setUser(user.getId());
 
@@ -107,13 +111,14 @@ public class CourseController extends HttpServlet {
                 cl.setCashbackPercentage(cashback);
                 cl.setAmountCashback(valorRetorno);
                 cl.setPaymentStatus(Constants.PaymentStatus.FINALIZADO);
-                cl.setDate(null);
 
                 log.create(cl);
 
                 rs = walletDAO.findByUserId(Integer.parseInt(request.getParameter("courseOwner")));
-
-                wallet.setAmount(rs.getFloat("amout") + valorPrecoCurso);
+                
+                rs.next();
+                
+                wallet.setAmount(rs.getFloat("amount") + valorPrecoCurso);
                 wallet.setCoin(rs.getFloat("coin"));
                 wallet.setId(rs.getInt("id"));
                 wallet.setUser(rs.getInt("user"));
