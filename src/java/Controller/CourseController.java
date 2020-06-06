@@ -1,13 +1,25 @@
 package Controller;
 
 import DAO.CourseDAO;
+import DAO.CourseLogTransactionDAO;
+import DAO.UserDAO;
 import DAO.VideoDAO;
+import DAO.WalletDAO;
 import Model.Course;
+import Model.CourseLogTransaction;
+import Model.User;
 import Model.Video;
+import Model.Wallet;
+import Util.Constants;
+import Util.Global;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Mateus Andreatta
  */
 public class CourseController extends HttpServlet {
 
@@ -41,6 +51,88 @@ public class CourseController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        try {
+
+            request.setCharacterEncoding("UTF-8");
+
+            User user = Global.getUser(request, response);
+            WalletDAO walletDAO = new WalletDAO();
+            Wallet wallet = new Wallet();
+
+            ResultSet rs = walletDAO.findById(user.getWallet());
+
+            float valorPrecoCurso = 0.0f;
+            float valorNaCarteira = 0.0f;
+            float valorComCoin = 0.0f;
+            float valorRestante = 0.0f;
+            int cashback = 0;
+            float valorRetorno = 0;
+
+            
+            valorNaCarteira = rs.getFloat("amount");
+            valorComCoin = rs.getFloat("coin");
+            valorPrecoCurso = Float.parseFloat(request.getParameter("coursePrice"));
+
+            cashback = Integer.parseInt(request.getParameter("coursePercentage"));
+
+            valorRetorno = valorPrecoCurso / 100 * cashback;
+
+            if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) {
+                valorRestante = valorComCoin - valorPrecoCurso;
+
+                if (valorRestante < 0) 
+                {
+                    valorRestante += valorNaCarteira;
+                    valorComCoin = 0;
+                } 
+                else 
+                {
+                    valorRestante += valorNaCarteira;
+                }
+
+                wallet.setCoin(valorComCoin);
+                wallet.setAmount(valorRestante);
+                wallet.setId(user.getWallet());
+                wallet.setUser(user.getId());
+
+                walletDAO.update(wallet);
+
+                CourseLogTransactionDAO log = new CourseLogTransactionDAO();
+                CourseLogTransaction cl = new CourseLogTransaction();
+
+                cl.setBuyer(user.getId());
+                cl.setSeller(Integer.parseInt(request.getParameter("courseOwner")));
+                cl.setCourseId(Integer.parseInt(request.getParameter("courseId")));
+                cl.setCoursePrice(valorPrecoCurso);
+                cl.setCashbackPercentage(cashback);
+                cl.setAmountCashback(valorRetorno);
+                cl.setPaymentStatus(Constants.PaymentStatus.FINALIZADO);
+                cl.setDate(null);
+
+                log.create(cl);
+
+                rs = walletDAO.findByUserId(Integer.parseInt(request.getParameter("courseOwner")));
+
+                wallet.setAmount(rs.getFloat("amout") + valorPrecoCurso);
+                wallet.setCoin(rs.getFloat("coin"));
+                wallet.setId(rs.getInt("id"));
+                wallet.setUser(rs.getInt("user"));
+                
+                walletDAO.update(wallet);
+
+                response.sendRedirect("Pages/meusCursos.jsp");
+
+            } 
+            else 
+            {
+                response.sendRedirect("Pages/course.jsp?erro=2");
+            }
+            
+        } 
+        catch (IOException | NumberFormatException | SQLException e)
+        {
+            response.sendRedirect("Pages/course.jsp?erro=1");
+        }
     }
 
     private Course getCourse(int id) {

@@ -25,8 +25,13 @@
                         <div class="determinate" style="width: 70%"></div>
                     </div>
                     <!--SE O usuario ja comprou o curso nao precisa mostrar esse forms-->
-                    <form method="post" action="">
+                    <form method="post" action="../CadastroCursoController">
+                        
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
+                        <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
+                        <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
+                        <input type="hidden" name="coursePercentage" value="<%out.print(curso.getCashbackPercentage());%>">
+
                         <button class="btn waves-effect waves-light" type="submit" name="action">Comprar curso
                             <i class="material-icons right">send</i>
                         </button>

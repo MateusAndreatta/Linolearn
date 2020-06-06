@@ -5,6 +5,7 @@ public class Wallet extends BaseModel
 {
     private int _user;
     private float _amount;
+    private float _coin;
 
     public Wallet() {
     }
@@ -14,6 +15,21 @@ public class Wallet extends BaseModel
         this._id = _id;
         this._user = _user;
         this._amount = _amount;
+        this._coin = 0.0f;
+    }
+
+    public float getCoin() {
+        return _coin;
+    }
+
+    public void setCoin(float _coin) {
+        this._coin = _coin;
+    }
+
+    public Wallet(int _user, float _amount, float _coin) {
+        this._user = _user;
+        this._amount = _amount;
+        this._coin = _coin;
     }
 
     public int getId() {

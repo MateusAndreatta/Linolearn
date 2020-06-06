@@ -82,4 +82,25 @@ public class WalletDAO extends BaseDAO
             return null;
         }
     }
+    
+     public ResultSet findByUserId(int idUser)
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * from %s " +
+                    "WHERE user = %s",
+                    this.nomeTabela,
+                    // Valores
+                    idUser
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(WalletDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

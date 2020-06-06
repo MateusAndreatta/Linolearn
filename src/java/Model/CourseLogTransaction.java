@@ -7,14 +7,28 @@ public class CourseLogTransaction extends BaseModel
     private int _courseId;
     private float _coursePrice;
     private int _cashbackPercentage;
-    private int _amountCashback;
+    private float _amountCashback;
     private int _paymentStatus;
     private String _date;
 
     public CourseLogTransaction() { }
 
+    public CourseLogTransaction(int _buyer, int _seller, int _courseId, 
+            float _coursePrice, int _cashbackPercentage, float _amountCashback, 
+            int _paymentStatus, String _date) 
+    {
+        this._buyer = _buyer;
+        this._seller = _seller;
+        this._courseId = _courseId;
+        this._coursePrice = _coursePrice;
+        this._cashbackPercentage = _cashbackPercentage;
+        this._amountCashback = _amountCashback;
+        this._paymentStatus = _paymentStatus;
+        this._date = _date;
+    }
+    
     public CourseLogTransaction(int _id, int _buyer, int _seller, int _courseId, 
-            float _coursePrice, int _cashbackPercentage, int _amountCashback, 
+            float _coursePrice, int _cashbackPercentage, float _amountCashback, 
             int _paymentStatus, String _date) 
     {
         this._id = _id;
@@ -27,7 +41,7 @@ public class CourseLogTransaction extends BaseModel
         this._paymentStatus = _paymentStatus;
         this._date = _date;
     }
-
+    
     public int getId() {
         return _id;
     }
@@ -76,11 +90,11 @@ public class CourseLogTransaction extends BaseModel
         this._cashbackPercentage = _cashbackPercentage;
     }
 
-    public int getAmountCashback() {
+    public float getAmountCashback() {
         return _amountCashback;
     }
 
-    public void setAmountCashback(int _amountCashback) {
+    public void setAmountCashback(float _amountCashback) {
         this._amountCashback = _amountCashback;
     }
 
