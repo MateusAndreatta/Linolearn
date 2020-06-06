@@ -43,7 +43,7 @@ public class MinhaContaController extends HttpServlet {
         user.setEmail(request.getParameter("email"));
 
         UserDAO userDAO = new UserDAO();
-        userDAO.update(user);
+        userDAO.updateMainInformation(user);
         session.setAttribute("user", user);
         response.sendRedirect("MinhaContaController");
     }

@@ -116,6 +116,33 @@ public class UserDAO extends BaseDAO
         }
     }
     
+    public int updateMainInformation(User user)
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "UPDATE %s " +
+                    "SET first_name = %s, last_name = %s, email = %s, "
+                            + " role = %d " +
+                    "WHERE id = %d ",
+                    this.nomeTabela,
+                    // Valores
+                    convertToQueryArg(user.getFirstName()),
+                    convertToQueryArg(user.getLastName()),
+                    convertToQueryArg(user.getEmail()),
+                    user.getRole(),
+                    user.getId()
+            );
+            
+            return super.update(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+    }
+    
     public int delete(User user) 
     {
         try
