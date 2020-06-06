@@ -4,7 +4,9 @@ import DAO.CourseDAO;
 import DAO.UserDAO;
 import Model.Course;
 import Model.User;
+import Util.HashPassword;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,21 +27,30 @@ public class LoginController extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        User user = autenticar(request.getParameter("email"), request.getParameter("password"));
+        User user = getUser(request.getParameter("email"));
 
         if (user != null) {
-            session.setAttribute("user", user);
-            session.setAttribute("cursos", getCourse());
-            response.sendRedirect("Pages/home.jsp");
-//                request.setAttribute("cursos", getCourse());
-            //            request.getRequestDispatcher("Pages/home.jsp").forward(request, response);
+
+            try {
+                if (user.getPassword().equals(HashPassword.hashPassword(request.getParameter("password")))) {
+                    session.setAttribute("user", user);
+                    session.setAttribute("cursos", getCourse());
+                    response.sendRedirect("Pages/home.jsp");
+                } else {
+                    response.sendRedirect("Pages/login.jsp?erro=2");
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                response.sendRedirect("Pages/login.jsp?erro=3");
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             session.invalidate();
+            response.sendRedirect("Pages/login.jsp?erro=1");
         }
 
     }
 
-    private User autenticar(String email, String password) {
+    private User getUser(String email) {
 
         UserDAO usuarioDAO = new UserDAO();
         ResultSet rs = usuarioDAO.findByEmail(email);
@@ -82,7 +93,7 @@ public class LoginController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         return list;
     }
 }

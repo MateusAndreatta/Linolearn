@@ -3,8 +3,11 @@
 <html>
     <head>
         <jsp:include page="head.jsp" >
-          <jsp:param name="title" value="Login"/>
+            <jsp:param name="title" value="Login"/>
         </jsp:include>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="../scripts/js.js"></script>
     </head>
     <body class="blue-grey lighten-3">
         <div class="login-container">
@@ -32,7 +35,16 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <%
+        if(request.getParameter("erro") != null){
+        
+            %>
+        <script>
+                 M.toast({html: 'Email/Senha incorreto'});
+        </script>
+            <%
+        }
+        %>
+        
     </body>
 </html>
