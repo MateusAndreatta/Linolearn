@@ -130,5 +130,27 @@ public class CourseDAO extends BaseDAO
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
-    }   
+    }
+    
+    
+    public ResultSet getAllCoursesByOwnerID(int ownerId)
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * FROM %s " +
+                    "WHERE owner = %s",
+                    this.nomeTabela,
+                    // Valores
+                    ownerId
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }
