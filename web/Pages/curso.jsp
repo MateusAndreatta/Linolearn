@@ -21,11 +21,11 @@
         <div class="container">
             <div class="row card">
                 <div class="col s12 m5">
-                    <img src="../imgs/uploads/<% out.print(curso.getImagePath());%>">
+                    <img class="img-course" src="../imgs/uploads/<% out.print(curso.getImagePath());%>">
                 </div>
                 <div class="col s12 m7">
                     <h4><% out.print(curso.getName());%>
-                        <a class="btn-floating btn-large waves-effect waves-light indigo right" href="updateCurso.jsp"><i class="material-icons">edit</i></a>
+                        <% if(owner) out.print("<a class='btn-floating btn-large waves-effect waves-light indigo right' href='updateCurso.jsp'><i class='material-icons'>edit</i></a>"); %>
                     </h4>
                     <h5><% out.print(curso.getDescription());%></h5>
                     <%
@@ -102,11 +102,11 @@
                             <%
                                 if (watched) {
                             %>
-                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%></div>
+                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
                             <%
                             } else {
                             %>
-                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%></div>
+                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
                             <%
                                 }
                             %>
@@ -129,7 +129,7 @@
                     <%
                         if (user.getId() == curso.getOwner()) {
                     %>
-                    <a class="waves-effect waves-light btn" href="cadastroAula.jsp?id=<%out.print(curso.getId());%>">Cadastrar aulas</a>
+                    <a class="waves-effect waves-light btn margin-botton" href="cadastroAula.jsp?id=<%out.print(curso.getId());%>">Cadastrar aulas</a>
                     <%
                         }
                     %>

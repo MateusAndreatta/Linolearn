@@ -37,3 +37,19 @@ blockquote{
 .hidebtn{
     display: none;
 }
+.options{
+    float: right;
+    right: 0;
+    position: absolute;
+}
+.options a{
+    color: black;
+}
+.img-course{
+    min-width: 400px;
+    margin-top: 10px;
+}
+
+.margin-botton{
+    margin-bottom: 10px;
+}

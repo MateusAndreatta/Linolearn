@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row card">
                 <div class="col s12">
-                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    <iframe id="ytplayer" type="text/html" width="1030" height="560"
                             src="https://www.youtube.com/embed/<% out.print(video.getPath());%>?autoplay=1"
                             frameborder="0"></iframe>
                 </div>
@@ -37,11 +37,11 @@
                         <%
                             if (watched) {
                         %>
-                        <button class="btn waves-effect waves-light disabled"  type="submit" name="action">Concluir
+                        <button class="btn waves-effect waves-light disabled margin-botton"  type="submit" name="action">Concluir
                             <i class="material-icons right">send</i>
                         </button>
                         <%} else {%>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Concluir
+                        <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Concluir
                             <i class="material-icons right">send</i>
                         </button>
                         <%}%>
