@@ -91,14 +91,14 @@ public class CadastroCursoController extends HttpServlet {
                     response.sendRedirect("Pages/erro.jsp");
                 }
                 
-                response.sendRedirect("Pages/meusCursos.jsp");
+                response.sendRedirect("MyCourseController");
             } else {
-                response.sendRedirect("Pages/home.jsp");
+                response.sendRedirect("HomeController");
             }
 
 //            request.setCharacterEncoding("UTF-8");
         } else {
-            response.sendRedirect("Pages/home.jsp");
+            response.sendRedirect("HomeController");
         }
 
     }
