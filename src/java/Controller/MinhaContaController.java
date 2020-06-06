@@ -14,46 +14,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Mateus Andreatta
  */
-public class WalletController extends HttpServlet {
+public class MinhaContaController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = Global.getUser(request, response);
+        session.setAttribute("wallet", getWallet(user.getWallet()));
+        response.sendRedirect("Pages/minhaConta.jsp");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        User user = Global.getUser(request, response);
-        Wallet wallet = getWallet(user.getWallet());
-        Global.printRequestParameters(request);
-        float valor = Float.parseFloat(request.getParameter("valor"));
-        boolean erro = false;
-        switch (request.getParameter("action")) {
-            case "retirada":
-                if (wallet.getAmount() >= valor) {
-                    wallet.setAmount(wallet.getAmount() - valor);
-                } else {
-                    erro = true;
-                }
-                break;
-            case "deposito":
-                wallet.setAmount(wallet.getAmount() + valor);
-                break;
-        }
-
-        WalletDAO walletDAO = new WalletDAO();
-        int update = walletDAO.update(wallet);
-        if (update == -1) {
-            erro = true;
-        }
-
-        if (erro) {
-            response.sendRedirect("Pages/deposito.jsp?erro=1");
-        } else {
-            response.sendRedirect("MinhaContaController");
-        }
     }
 
     private Wallet getWallet(int idWallet) {
@@ -73,10 +54,4 @@ public class WalletController extends HttpServlet {
         return wallet;
     }
 
-    private void retirada() {
-    }
-
-    private void deposito(Wallet wallet, float valor) {
-
-    }
 }

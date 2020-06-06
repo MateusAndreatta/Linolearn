@@ -28,7 +28,6 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = Global.getUser(request, response);
         HttpSession session = request.getSession();
         session.setAttribute("cursos", getCourse());
         response.sendRedirect("Pages/home.jsp");

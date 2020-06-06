@@ -65,17 +65,17 @@
                         <h3 class="center">Sua carteira</h3>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input disabled value="44.32" id="reais" type="text" class="validate">
+                                <input disabled value="${sessionScope.wallet.getAmount()}" id="reais" type="text" class="validate">
                                 <label for="reais">Reais</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input disabled value="5" id="linocoins" type="text" class="validate">
+                                <input disabled value="${sessionScope.wallet.getCoin()}" id="linocoins" type="text" class="validate">
                                 <label for="linocoins">Linocoins</label>
                             </div>
                         </div>
-                        <a class="waves-effect waves-light btn" href="deposito.jsp">Depositar</a>
+                        <a class="waves-effect waves-light btn" href="deposito.jsp">Depositos/Retiradas</a>
                     </div>
                 </div>
 

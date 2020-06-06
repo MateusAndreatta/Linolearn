@@ -5,12 +5,12 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="../HomeController">Home</a></li>
             <li><a href="../MyCourseController">Meus cursos</a></li>
-            <li><a href="minhaConta.jsp">Minha conta</a></li>
+            <li><a href="../MinhaContaController">Minha conta</a></li>
         </ul>
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
     <li><a href="../HomeController">Home</a></li>
     <li><a href="../MyCourseController">Meus cursos</a></li>
-    <li><a href="minhaConta.jsp">Minha conta</a></li>
+    <li><a href="../MinhaContaController">Minha conta</a></li>
 </ul>
