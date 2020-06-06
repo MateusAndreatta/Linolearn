@@ -43,7 +43,7 @@
                             <input class="file-path validate" name="capa" value="${sessionScope.course.getImagePath()}" type="text" required>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Salvar
+                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Salvar
                         <i class="material-icons right">send</i>
                     </button>
                 </form>
