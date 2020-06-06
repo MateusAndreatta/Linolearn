@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.UserDAO;
 import DAO.WalletDAO;
 import Model.User;
 import Model.Wallet;
@@ -34,7 +35,17 @@ public class MinhaContaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
+        User user = Global.getUser(request, response);
+        user.setFirstName(request.getParameter("nome"));
+        user.setLastName(request.getParameter("sobrenome"));
+        user.setEmail(request.getParameter("email"));
+
+        UserDAO userDAO = new UserDAO();
+        userDAO.update(user);
+        session.setAttribute("user", user);
+        response.sendRedirect("MinhaContaController");
     }
 
     private Wallet getWallet(int idWallet) {
