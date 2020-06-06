@@ -16,6 +16,7 @@
         <% Course curso = (Course) session.getAttribute("course");%>
         <% Boolean buyed = (Boolean) session.getAttribute("buyed");%>
         <% User user = (User) session.getAttribute("user");%>
+        <% Boolean owner = (user.getId() == curso.getOwner()) ? true : false;%>
 
         <div class="container">
             <div class="row card">
@@ -23,13 +24,19 @@
                     <img src="../imgs/uploads/<% out.print(curso.getImagePath());%>">
                 </div>
                 <div class="col s12 m7">
-                    <h4><% out.print(curso.getName());%></h4>
+                    <h4><% out.print(curso.getName());%>
+                        <a class="btn-floating btn-large waves-effect waves-light indigo right" href="updateCurso.jsp"><i class="material-icons">edit</i></a>
+                    </h4>
                     <h5><% out.print(curso.getDescription());%></h5>
                     <%
                         if (buyed) {
                             List<Video> v = (List<Video>) request.getSession().getAttribute("videos");
                             List<VideoWatched> vw = (List<VideoWatched>) request.getSession().getAttribute("videosWatched");
-                            float porcentagem = (vw.size() * 100) / v.size();
+                            float porcentagem = 0;
+                            if (vw.size() != 0) {
+                                porcentagem = (vw.size() * 100) / v.size();
+                            }
+
                     %>
                     <div class="progress tooltipped curso-progress" data-position="bottom" data-tooltip="Você já realizou <%out.print(porcentagem);%>% do curso!">a
                         <div class="determinate" style="width: <%out.print(porcentagem);%>%"></div>
