@@ -6,10 +6,13 @@
             <jsp:param name="title" value="Cadastro"/>
         </jsp:include>
     </head>
-    <body class="blue-grey lighten-3">
+    
+    <jsp:include page="../Pages/public/navbar.jsp" />
+    
+    <body>
         <div class="container">
             <div class="row">
-                <h2 class="center">Cadastro</h2>
+                <h2 class="center">Cadastre-se</h2>
                 <form class="col s12 card cadastro-form" method="post" action="../CadastroController">
                     <div class="row">
                         <div class="input-field col s12 m6">
@@ -38,12 +41,16 @@
                                 <option value="1">Aluno</option>
                                 <option value="2">Professor</option>
                             </select>
-                            <!--<label></label>-->
                         </div>
-                        <button class="btn waves-effect waves-light right" style="margin-right: 10px" type="submit" name="action">Cadastrar
-                            <i class="material-icons right">send</i>
-                        </button>
                     </div>
+                    
+                    <div class="row">
+                            <div class="input-field col s12 m12">
+                                <button class="btn waves-effect waves-light right" style="margin-right: 10px" type="submit" name="action">Cadastrar
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
                 </form>
             </div>
         </div>

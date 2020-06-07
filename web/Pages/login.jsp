@@ -5,13 +5,15 @@
         <jsp:include page="head.jsp" >
             <jsp:param name="title" value="Login"/>
         </jsp:include>
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="../scripts/js.js"></script>
+
     </head>
-    <body class="blue-grey lighten-3">
+    
+    <jsp:include page="../Pages/public/navbar.jsp" />
+    
+    
+    <body>
         <div class="login-container">
-            <div class="login-card">
+            <div class="login-card" style="margin-top: 10%;">
                 <form class="col s12 card" method="post" action="../LoginController">
                     <div class="row">
                         <div class="col s12 center">
@@ -28,23 +30,28 @@
                         <input id="icon_password" type="password" name="password" class="validate" required>
                         <label for="icon_password">Senha</label>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <div class="input-field col s12" style="height: 20px;">
+                        <button class="btn green right waves-effect waves-light" type="submit" name="action">Acessar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
 
         <%
-        if(request.getParameter("erro") != null){
-        
-            %>
-        <script>
-                 M.toast({html: 'Email/Senha incorreto'});
-        </script>
-            <%
-        }
+            if (request.getParameter("erro") != null) {
+
         %>
-        
+        <script>
+            M.toast({html: 'Email/Senha incorreto'});
+        </script>
+        <%                }
+        %>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="../scripts/js.js"></script>
+
     </body>
 </html>
