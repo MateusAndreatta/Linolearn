@@ -22,7 +22,9 @@ public class TransactionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        System.out.println("poi");
+        
     }
 
     @Override
@@ -41,14 +43,41 @@ public class TransactionController extends HttpServlet {
                     comprarCurso(user, request, response);
                     break;
                 case 1:
-                    
+                    ResgatarCashback(user, request, response);
             }
 
-        } catch (IOException | NumberFormatException | SQLException e) {
+        }
+        catch (IOException | NumberFormatException | SQLException e) 
+        {
             response.sendRedirect("Pages/curso.jsp?erro=1");
         }
     }
 
+    private void ResgatarCashback(User user, HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+
+        WalletDAO walletDAO = new WalletDAO();
+        Wallet wallet = new Wallet();
+
+        CourseLogTransactionDAO log = new CourseLogTransactionDAO();
+
+        ResultSet rs = walletDAO.findById(user.getWallet());
+        ResultSet rsLog = log.getCashbackFromUserAndCourse(user.getId(), Integer.parseInt(request.getParameter("courseId")));
+
+        rs.next();
+        rsLog.next();
+        
+        wallet.setAmount(rs.getFloat("amount") + rsLog.getFloat("amount_cashback"));
+        wallet.setCoin(rs.getFloat("coin"));
+        wallet.setId(rs.getInt("id"));
+        wallet.setUser(rs.getInt("user"));
+        
+        walletDAO.update(wallet);
+
+        response.sendRedirect("MyCourseController");
+        
+    }
+    
     private void comprarCurso(User user, HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
 

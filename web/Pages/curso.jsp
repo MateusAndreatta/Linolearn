@@ -1,4 +1,3 @@
-<%@page import="sun.text.normalizer.UBiDiProps"%>
 <%@page import="Model.VideoWatched"%>
 <%@page import="Model.User"%>
 <%@page import="Model.Video"%>

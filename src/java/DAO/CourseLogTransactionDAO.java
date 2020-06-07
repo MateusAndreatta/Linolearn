@@ -89,6 +89,31 @@ public class CourseLogTransactionDAO extends BaseDAO
         }
     }
     
+    public ResultSet getCashbackFromUserAndCourse(int idUser, int courseId)
+    {
+        try 
+        {    
+            this.query = String.format(
+                    "SELECT * FROM %s " +
+                    "WHERE buyer = %s " +
+                    "AND course_id = %s " +
+                    "ORDER BY date DESC",
+                    
+                    this.nomeTabela,
+                    // Valores
+                    idUser,
+                    courseId
+            );
+            
+            return super.read(this.query);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(CourseLogTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public ResultSet getAllSelledCoursesByUserId(int idUser)
     {
         try 
