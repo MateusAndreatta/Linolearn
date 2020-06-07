@@ -25,40 +25,67 @@ public class CadastroCursoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         
         request.setCharacterEncoding("UTF-8");
-
+        
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
+        
         if (isMultipart) {
 
             User user = Global.getUser(request, response);
-            if (Global.checkPermission(user, Constants.Role.PROFESSOR)) {
+            
+            if (Global.checkPermission(user, Constants.Role.PROFESSOR)) 
+            {
+                
                 Course course = new Course();
+                
                 FileItemFactory factory = new DiskFileItemFactory();
+                
                 ServletFileUpload upload = new ServletFileUpload(factory);
+                
                 course.setOwner(user.getId());
-                try {
+                
+                try 
+                {
                     // Parse the request
+                    
                     List items = upload.parseRequest(request);
+                    
                     Iterator iterator = items.iterator();
+                    
                     while (iterator.hasNext()) {
+                        
                         FileItem item = (FileItem) iterator.next();
-                        if (!item.isFormField()) {
+                        
+                        if (!item.isFormField()) 
+                        {
+                            
                             String fileName = item.getName();
+                            
                             fileName = System.currentTimeMillis() + fileName;
+                            
                             String root = getServletContext().getRealPath("/");
+                            
                             root = root.replace("\\build", "");// Retira ele da pasta build
+                            
                             File path = new File(root + "imgs/uploads");
+                            
                             if (!path.exists()) {
                                 boolean status = path.mkdirs();
                             }
+                            
                             File uploadedFile = new File(path + "/" + fileName);
+                            
                             System.out.println(uploadedFile.getAbsolutePath());
+                            
                             item.write(uploadedFile);
+                            
                             course.setImagePath(fileName);
+                            
                         } else {
+                            
                             switch (item.getFieldName()) {
                                 case "nome":
                                     System.out.println(item.getString());
@@ -79,28 +106,38 @@ public class CadastroCursoController extends HttpServlet {
                             }
                         }
                     }
-                } catch (FileUploadException e) {
+                } 
+                catch (FileUploadException e)
+                {
                     e.printStackTrace();
-                } catch (Exception e) {
+                } 
+                catch (Exception e) 
+                {
                     e.printStackTrace();
                 }
                 //TODO o curso ja vem todo preenchido, basta apenas mandar ele na DAO para inserir no banco 
-                try{
+                try
+                {
                     CourseDAO courseDao = new CourseDAO();
                     courseDao.create(course);
-                }catch(Exception ex){
+                }
+                catch(Exception ex)
+                {
                     response.sendRedirect("Pages/erro.jsp");
                 }
                 
                 response.sendRedirect("MyCourseController");
-            } else {
+            } 
+            else 
+            {
                 response.sendRedirect("HomeController");
             }
 
-//            request.setCharacterEncoding("UTF-8");
-        } else {
+            request.setCharacterEncoding("UTF-8");
+        } 
+        else 
+        {
             response.sendRedirect("HomeController");
         }
-
     }
 }

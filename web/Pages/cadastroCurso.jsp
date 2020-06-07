@@ -1,13 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="pt">
     <head>
         <jsp:include page="head.jsp" >
             <jsp:param name="title" value="Novo curso"/>
         </jsp:include>
     </head>
     <body>
+        
         <jsp:include page="navbar.jsp" />
+        
+        <main>
         <div class="container">
             <div class="row">
                 <h2 class="center">Criar curso</h2>
@@ -43,12 +46,15 @@
                             <input class="file-path validate" type="text" required>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Cadastrar
+                    <button class="btn right waves-effect waves-light margin-botton" type="submit" name="action">Cadastrar
                         <i class="material-icons right">send</i>
                     </button>
                 </form>
             </div>
         </div>
+        
+        </main>
+        
         <jsp:include page="footer.jsp" />
     </body>
 </html>

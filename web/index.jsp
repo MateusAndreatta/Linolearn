@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt">
     <head>
@@ -40,7 +41,7 @@
             <div class="section no-pad-bot" id="index-banner">
                 <div class="container">
 
-                    <h1 class="header center red-text">Ganhe apÛs aprender!</h1>
+                    <h1 class="header center red-text">Ganhe ap√≥s aprender!</h1>
                     <div class="row center">
                         <h5 class="header col s12 light">Plataforma web para aprendizado com cashback!</h5>
                     </div>
@@ -60,11 +61,11 @@
                         <div class="col s12 m4">
                             <div class="icon-block">
                                 <h2 class="center "><i class="material-icons">flash_on</i></h2>
-                                <h5 class="center">Aprendizado pr·tico</h5>
+                                <h5 class="center">Aprendizado pr√°tico</h5>
 
-                                <p class="light">Os melhores professores est„o aqui. 
-                                    Aulas pr·ticas (hands on) com as tecnologias mais atuais do mercado (como JSP sem ORM). 
-                                    Tudo em sÛ um lugar! Aqui na Linolearn È onde vocÍ aprende e decola na carreira!
+                                <p class="light">Os melhores professores est√£o aqui. 
+                                    Aulas pr√°ticas (hands on) com as tecnologias mais atuais do mercado (como JSP sem ORM). 
+                                    Tudo em s√≥ um lugar! Aqui na Linolearn √© onde voc√™ aprende e decola na carreira!
                                 </p>
                             </div>
                         </div>
@@ -72,11 +73,11 @@
                         <div class="col s12 m4">
                             <div class="icon-block">
                                 <h2 class="center "><i class="material-icons">group</i></h2>
-                                <h5 class="center">Usu·rios Primeiro</h5>
+                                <h5 class="center">Usu√°rios Primeiro</h5>
 
                                 <p class="light">
-                                    Nossa plataforma È focada em User First. Possui interface de f·cil interaÁ„o com responsividade e textos adaptados para os mais diversos usu·rios.
-                                    TambÈm contamos com uma forma de motivaÁ„o ao usu·rio para terminar o curso: O cashback. Este cashback pode ser usado em todo o site e n„o depende de cursos, assim o usu·rio define como quer usar, quando quiser usar!
+                                    Nossa plataforma √© focada em User First. Possui interface de f√°cil intera√ß√£o com responsividade e textos adaptados para os mais diversos usu√°rios.
+                                    Tamb√©m contamos com uma forma de motiva√ß√£o ao usu√°rio para terminar o curso: O cashback. Este cashback pode ser usado em todo o site e n√£o depende de cursos, assim o usu√°rio define como quer usar, quando quiser usar!
                                 </p>
                             </div>
                         </div>
@@ -86,7 +87,7 @@
                                 <h2 class="center "><i class="material-icons">settings</i></h2>
                                 <h5 class="center">Como funciona</h5>
 
-                                <p class="light">O cashback È universal e utiliza a moeda Linocoin (LCN). ApÛs o usu·rio concluir um determinado curso ele poder· solicitar o resgate do seu cashback, e imediatamente o valor È adicionado ao seu valor de carteira, assim, poder· utilizar onde quiser e quando quiser! Pr·tico, simples e o melhor: VOC  controle!</p>
+                                <p class="light">O cashback √© universal e utiliza a moeda Linocoin (LCN). Ap√≥s o usu√°rio concluir um determinado curso ele poder√° solicitar o resgate do seu cashback, e imediatamente o valor √© adicionado ao seu valor de carteira, assim, poder√° utilizar onde quiser e quando quiser! Pr√°tico, simples e o melhor: VOC√ä controle!</p>
                             </div>
                         </div>
                     </div>
