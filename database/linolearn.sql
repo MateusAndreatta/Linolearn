@@ -3,14 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Maio-2020 às 01:16
+-- Tempo de geração: 07-Jun-2020 às 19:26
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "-03:00";
+SET time_zone = "+03:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,10 +21,8 @@ SET time_zone = "-03:00";
 --
 -- Banco de dados: `linolearn`
 --
-
-DROP SCHEMA IF EXISTS `linolearn`;
-CREATE SCHEMA IF NOT EXISTS `linolearn` DEFAULT CHARACTER SET utf8mb4;
-USE `linolearn`;
+CREATE SCHEMA IF NOT EXISTS `linolearn` DEFAULT CHARACTER SET utf8mb4 ;
+USE `linolearn` ;
 
 -- --------------------------------------------------------
 
@@ -48,6 +46,7 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
 (1, 'Curso de HTML5', 'Aprenda tudo sobre HTML5, nesse curso você irá criar um site completo - by Gustavo Guanabara', 'cursohtml5.png', 19.99, 15, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -61,7 +60,7 @@ CREATE TABLE `course_log_transaction` (
   `course_id` int(11) NOT NULL,
   `course_price` float NOT NULL,
   `cashback_percentage` int(11) NOT NULL,
-  `amount_cashback` float NULL,
+  `amount_cashback` float NOT NULL,
   `payment_status` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -147,14 +146,18 @@ CREATE TABLE `video` (
   `path` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `video`
+--
+
+INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES
+(1, 1, 'Introdução', 'HTML5 é uma linguagem de marcação hipertexto utilizada para criar sites. A versão 5 da linguagem foi homologada e lançada a partir de 2009, mas só ganhou mercado no final de 2012 com o surgimento dos grandes navegadores compatíveis.', 'epDCjksKMok'),
+(2, 1, 'História da Internet', 'Nesta primeira aula, aprenda como a Internet surgiu e evoluiu até o que temos hoje em dia. Um apanhado geral de todos os inventores e invenções que fizeram parte da evolução da maior rede mundial.', 'rsFCVjr5yxc'),
+(3, 1, 'História da HTML', 'Você sabe como surgiu a linguagem HTML? Conhece a evolução desde a HTML1 até HTML5? Sabe quais são as principais funções W3C? Veja nessa aula a resposta para todas essas perguntas e muito mais.', 'NSmapCNcSyI'),
+(4, 1, 'Como Funciona a Internet', 'Aula do Curso de HTML5 criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.', 'LMfeZ6XD0No'),
+(5, 1, 'Primeiro Exemplo em HTML5', 'Aula 100% prática de HTML5 com CSS3. Conheça as tags básicas e saiba como criar um documento no novo padrão.', 'yCSSsBNBzso');
+
 -- --------------------------------------------------------
-
-
-INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (1, 1, 'Introdução', 'HTML5 é uma linguagem de marcação hipertexto utilizada para criar sites. A versão 5 da linguagem foi homologada e lançada a partir de 2009, mas só ganhou mercado no final de 2012 com o surgimento dos grandes navegadores compatíveis.', 'epDCjksKMok');
-INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (2, 1, 'História da Internet', 'Nesta primeira aula, aprenda como a Internet surgiu e evoluiu até o que temos hoje em dia. Um apanhado geral de todos os inventores e invenções que fizeram parte da evolução da maior rede mundial.', 'rsFCVjr5yxc');
-INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (3, 1, 'História da HTML', 'Você sabe como surgiu a linguagem HTML? Conhece a evolução desde a HTML1 até HTML5? Sabe quais são as principais funções W3C? Veja nessa aula a resposta para todas essas perguntas e muito mais.', 'NSmapCNcSyI');
-INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (4, 1, 'Como Funciona a Internet', 'Aula do Curso de HTML5 criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.', 'LMfeZ6XD0No');
-INSERT INTO `video` (`id`, `course_id`, `name`, `description`, `path`) VALUES (5, 1, 'Primeiro Exemplo em HTML5', 'Aula 100% prática de HTML5 com CSS3. Conheça as tags básicas e saiba como criar um documento no novo padrão.', 'yCSSsBNBzso');
 
 --
 -- Estrutura da tabela `video_watched`
@@ -185,23 +188,9 @@ CREATE TABLE `wallet` (
 -- Extraindo dados da tabela `wallet`
 --
 
-INSERT INTO `wallet` (`id`, `user`, `amount`,`coin`) VALUES
-(1, 1, 0,0),
-(2, 4, 50.51,0);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `wallet_log_transaction`
---
-
-CREATE TABLE `wallet_log_transaction` (
-  `id` int(11) NOT NULL,
-  `id_wallet` int(11) NOT NULL,
-  `added_amount` float NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `payment_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `wallet` (`id`, `user`, `amount`, `coin`) VALUES
+(1, 1, 0, 0),
+(2, 4, 70.5, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -269,14 +258,6 @@ ALTER TABLE `wallet`
   ADD KEY `fk_user_idx` (`user`);
 
 --
--- Índices para tabela `wallet_log_transaction`
---
-ALTER TABLE `wallet_log_transaction`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_wallet_log_transaction_id_wallet` (`id_wallet`),
-  ADD KEY `fk_wallet_log_transaction_payment_status` (`payment_status`);
-
---
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -290,7 +271,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT de tabela `course_log_transaction`
 --
 ALTER TABLE `course_log_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `payment_status`
@@ -314,25 +295,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de tabela `video`
 --
 ALTER TABLE `video`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `video_watched`
 --
 ALTER TABLE `video_watched`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `wallet`
 --
 ALTER TABLE `wallet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `wallet_log_transaction`
---
-ALTER TABLE `wallet_log_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para despejos de tabelas
@@ -342,49 +317,42 @@ ALTER TABLE `wallet_log_transaction`
 -- Limitadores para a tabela `course`
 --
 ALTER TABLE `course`
-  ADD CONSTRAINT `fk_course_owner_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_course_owner_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `course_log_transaction`
 --
 ALTER TABLE `course_log_transaction`
-  ADD CONSTRAINT `fk_transaction_log_course_selled` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_transaction_log_payment_status` FOREIGN KEY (`payment_status`) REFERENCES `payment_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_transaction_log_user_buyer` FOREIGN KEY (`buyer`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_transaction_log_user_seller` FOREIGN KEY (`seller`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_transaction_log_course_selled` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_log_payment_status` FOREIGN KEY (`payment_status`) REFERENCES `payment_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_log_user_buyer` FOREIGN KEY (`buyer`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_log_user_seller` FOREIGN KEY (`seller`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `video`
 --
 ALTER TABLE `video`
-  ADD CONSTRAINT `fk_video_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_video_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `video_watched`
 --
 ALTER TABLE `video_watched`
-  ADD CONSTRAINT `fk_video_watched_course_user_video_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_video_watched_user_course_video_id` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_video_watched_video_user_course_id` FOREIGN KEY (`id_video`) REFERENCES `video` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_video_watched_course_user_video_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_video_watched_user_course_video_id` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_video_watched_video_user_course_id` FOREIGN KEY (`id_video`) REFERENCES `video` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `wallet`
 --
 ALTER TABLE `wallet`
-  ADD CONSTRAINT `fk_wallet_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `wallet_log_transaction`
---
-ALTER TABLE `wallet_log_transaction`
-  ADD CONSTRAINT `fk_wallet_log_transaction_id_wallet` FOREIGN KEY (`id_wallet`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_wallet_log_transaction_payment_status` FOREIGN KEY (`payment_status`) REFERENCES `payment_status` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_wallet_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
