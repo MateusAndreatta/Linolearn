@@ -11,8 +11,9 @@
         <div class="container">
             <div class="row">
                 <h2 class="center">Atualizar aula</h2>
-                <form class="col s12 card cadastro-form" method="post" action="../CadastroAulaController">
+                <form class="col s12 card cadastro-form" method="post" action="../VideoController">
                     <input type="hidden" name="courseID" value="<%out.print(request.getParameter("id"));%>">
+                    <input type="hidden" name="videoID" value="${sessionScope.video.getId()}">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="nome" type="text" class="validate" value="${sessionScope.video.getName()}" name="nome" required>
@@ -31,7 +32,7 @@
                             <label for="descricao">Descricao</label>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="edit">Cadastrar
+                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="edit">Salvar
                         <i class="material-icons right">send</i>
                     </button>
                 </form>

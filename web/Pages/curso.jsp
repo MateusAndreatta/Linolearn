@@ -115,11 +115,11 @@
                             <%
                                 if (watched) {
                             %>
-                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='updateAula.jsp'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
+                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
                                 <%
                                 } else {
                                 %>
-                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='updateAula.jsp'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
+                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
                                 <%
                                     }
                                 %>
@@ -129,7 +129,7 @@
                                 <%
                                     if (buyed) {
                                 %>
-                                <a href="../VideoController?id=<%out.print(v.getId());%>">Assitir a aula</a>
+                                <a href="../VideoController?id=<%out.print(v.getId());%>&action=watch">Assitir a aula</a>
                                 <%
                                     }
                                 %>

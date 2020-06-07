@@ -27,19 +27,29 @@ public class VideoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String parameter = request.getParameter("id");
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        session.setAttribute("video", getVideo(Integer.parseInt(parameter)));
-        response.sendRedirect("Pages/aula.jsp");
+        Video video = getVideo(Integer.parseInt(id));
+        session.setAttribute("video", video);
+        String page = "Pages/curso.jsp";
+        if (action.equals("edit")) {
+            page = "Pages/updateAula.jsp?id=" + video.getCourseId();
+        } 
+        if(action.equals("watch")) {
+            page = "Pages/aula.jsp";
+        }
+        response.sendRedirect(page);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Global.printRequestParameters(request);
         String action = request.getParameter("action");
-
+        VideoDAO videoDAO = new VideoDAO();
         switch (action) {
             case "cadastro":
 
@@ -49,7 +59,6 @@ public class VideoController extends HttpServlet {
                 v.setName(request.getParameter("nome"));
                 v.setPath(request.getParameter("path"));
 
-                VideoDAO videoDAO = new VideoDAO();
                 try {
                     videoDAO.create(v);
                 } catch (SQLException ex) {
@@ -59,6 +68,16 @@ public class VideoController extends HttpServlet {
 
                 break;
             case "edit":
+
+                Video videoEdit = new Video();
+                videoEdit.setCourseId(Integer.parseInt(request.getParameter("courseID")));
+                videoEdit.setDescription(request.getParameter("descricao"));
+                videoEdit.setName(request.getParameter("nome"));
+                videoEdit.setPath(request.getParameter("path"));
+                videoEdit.setId(Integer.parseInt(request.getParameter("videoID")));
+
+                videoDAO.update(videoEdit);
+
                 break;
             case "watch":
 
