@@ -27,7 +27,11 @@ public class MyCourseController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
+        
+        request.setCharacterEncoding("UTF-8");
+        
         User user = Global.getUser(request, response);
 
         HttpSession session = request.getSession();
@@ -42,8 +46,9 @@ public class MyCourseController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException 
+    {
+        request.setCharacterEncoding("UTF-8");
     }
 
     private List<Course> getAllBuyed(int userId) {

@@ -24,16 +24,26 @@ public class MinhaContaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
+        
         User user = Global.getUser(request, response);
+        
         session.setAttribute("wallet", getWallet(user.getWallet()));
+       
         response.sendRedirect("Pages/minhaConta.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
+        
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
 
         User user = Global.getUser(request, response);

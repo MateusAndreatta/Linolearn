@@ -26,6 +26,8 @@ public class CourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
+        request.setCharacterEncoding("UTF-8");
 
         String parameter = request.getParameter("id");
 
@@ -46,6 +48,8 @@ public class CourseController extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            
+            request.setCharacterEncoding("UTF-8");
 
             Course c = new Course();
             CourseDAO cd = new CourseDAO();

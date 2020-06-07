@@ -21,7 +21,11 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
+        
         session.setAttribute("cursos", getCourse());
         response.sendRedirect("Pages/home.jsp");
     }
@@ -30,6 +34,8 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        
     }
 
     private List<Course> getCourse() {

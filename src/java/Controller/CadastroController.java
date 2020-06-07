@@ -52,9 +52,9 @@ public class CadastroController extends HttpServlet {
             { 
                 response.sendRedirect("Pages/login.jsp");
             } 
-            else {
-                response.sendRedirect("Pages/erro.jsp");
-            }
+
+            response.sendRedirect("Pages/erro.jsp");
+
             
         } 
         catch (SQLException ex) 

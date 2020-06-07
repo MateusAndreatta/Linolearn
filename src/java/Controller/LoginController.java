@@ -22,6 +22,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
         User user = getUser(request.getParameter("email"));
 

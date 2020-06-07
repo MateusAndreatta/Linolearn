@@ -14,13 +14,18 @@ public class LogoutController extends HttpServlet {
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        
         request.getSession().invalidate();
+        
         response.sendRedirect("Pages/login.jsp");
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
 
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/login.jsp");
