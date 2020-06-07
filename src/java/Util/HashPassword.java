@@ -1,18 +1,27 @@
 package Util;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+public class HashPassword {
 
-public class HashPassword 
-{
-    public static String hashPassword(String password) throws NoSuchAlgorithmException
+    public static String hashPassword(String password) 
+            throws NoSuchAlgorithmException, UnsupportedEncodingException
     {
-        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        messageDigest.update(password.getBytes());
+
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         
-        String encryptedString = new String(messageDigest.digest());
+        byte messageDigest[] = algorithm.digest(password.getBytes("UTF-8"));
+
+        StringBuilder hexString = new StringBuilder();
         
-        return encryptedString;
+        for (byte b : messageDigest) {
+            hexString.append(String.format("%02X", 0xFF & b));
+        }
+        
+        return hexString.toString();
+
     }
+
 }
