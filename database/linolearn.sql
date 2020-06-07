@@ -49,16 +49,16 @@ INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashb
 (1, 'Curso de HTML5', 'Aprenda tudo sobre HTML5, nesse curso você irá criar um site completo - by Gustavo Guanabara', 'cursohtml5.png', 19.99, 15, 4);
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
-(2, 'Aprenda CSS3!', 'Neste curso você aprenderá como estlizar páginas usando CSS! Ensinaremos como fazer o estilo de sites com os principais atributos usados.', 'cursoCSS.png', 19.99, 15, 4);
+(2, 'Aprenda CSS3!', 'Neste curso você aprenderá como estlizar páginas usando CSS!', 'cursoCSS.png', 19.99, 15, 4);
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
-(3, 'Javascript Essencial', 'Nesse curso eu vou ensinar  a base e os fundamentos do Javascript, uma linguagem de programação client-side, amplamente em aplicações web.', 'cursoJs.jpg', 29.99, 15, 4);
+(3, 'Javascript Essencial', 'Nesse curso eu vou ensinar  a base e os fundamentos do Javascript.', 'cursoJs.jpg', 29.99, 15, 4);
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
 (4, 'Curso Python', 'Neste curso você irá aprender Python do básico ao avançado e alavanque sua carreira!', 'cursoPython.png', 39.99, 15, 4);
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
-(5, 'Curso PHP Iniciante', 'Aula do Curso de PHP para Iniciantes criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.', 'cursoPHP.jpg', 59.99, 15, 4);
+(5, 'Curso PHP Iniciante', 'Aula do Curso de PHP para iniciantes.', 'cursoPHP.jpg', 59.99, 15, 4);
 
 INSERT INTO `course` (`id`, `name`, `description`, `image_path`, `price`, `cashback_percentage`, `owner`) VALUES
 (6, 'Aprenda C#', 'Aprenda como fazer programas em C# sem nenhum conhecimento prévio!', 'cursoC.jpg', 39.99, 15, 4);

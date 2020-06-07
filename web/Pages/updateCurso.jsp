@@ -10,7 +10,7 @@
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="row">
-                <h2 class="center">Alterar curso ${sessionScope.course.getId()}</h2>
+                <h2 class="center">Alterar curso</h2>
                 <form class="col s12 card" method="post" action="../CourseController">
                     <input type="hidden" value="${sessionScope.course.getId()}" name="courseId">
                     <div class="row">
