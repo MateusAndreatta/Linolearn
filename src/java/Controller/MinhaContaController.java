@@ -6,7 +6,6 @@ import Model.User;
 import Model.Wallet;
 import Util.Global;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;

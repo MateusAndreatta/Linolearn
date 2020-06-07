@@ -5,7 +5,6 @@ import Model.Course;
 import Model.User;
 import Util.Constants;
 import Util.Global;
-import Util.HashPassword;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
