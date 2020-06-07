@@ -39,24 +39,52 @@ public class VideoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Global.printRequestParameters(request);
+        String action = request.getParameter("action");
 
-        String parameter = request.getParameter("videoId");
-        VideoWatched videoWatched = new VideoWatched();
-        User user = Global.getUser(request, response);
-        videoWatched.setIdVideo(Integer.parseInt(parameter));
-        videoWatched.setCourseId(Integer.parseInt(request.getParameter("courseId")));
-        videoWatched.setIdUser(user.getId());
+        switch (action) {
+            case "cadastro":
 
-        VideoWatchedDAO vwdao = new VideoWatchedDAO();
-        try {
-            vwdao.create(videoWatched);
-            List<VideoWatched> list = (List<VideoWatched>) session.getAttribute("videosWatched");
-            list.add(videoWatched);
-            session.setAttribute("videosWatched", list);
-            response.sendRedirect("Pages/curso.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+                Video v = new Video();
+                v.setCourseId(Integer.parseInt(request.getParameter("courseID")));
+                v.setDescription(request.getParameter("descricao"));
+                v.setName(request.getParameter("nome"));
+                v.setPath(request.getParameter("path"));
+
+                VideoDAO videoDAO = new VideoDAO();
+                try {
+                    videoDAO.create(v);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                response.sendRedirect("CourseController?id=" + request.getParameter("courseID"));
+
+                break;
+            case "edit":
+                break;
+            case "watch":
+
+                String parameter = request.getParameter("videoId");
+                VideoWatched videoWatched = new VideoWatched();
+                User user = Global.getUser(request, response);
+                videoWatched.setIdVideo(Integer.parseInt(parameter));
+                videoWatched.setCourseId(Integer.parseInt(request.getParameter("courseID")));
+                videoWatched.setIdUser(user.getId());
+
+                VideoWatchedDAO vwdao = new VideoWatchedDAO();
+                try {
+                    vwdao.create(videoWatched);
+                    List<VideoWatched> list = (List<VideoWatched>) session.getAttribute("videosWatched");
+                    list.add(videoWatched);
+                    session.setAttribute("videosWatched", list);
+//                    response.sendRedirect("CourseController?id=" + request.getParameter("courseID"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
         }
+        response.sendRedirect("CourseController?id=" + request.getParameter("courseID"));
     }
 
     private Video getVideo(int id) {

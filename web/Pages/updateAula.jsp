@@ -31,7 +31,7 @@
                             <label for="descricao">Descricao</label>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Cadastrar
+                    <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="edit">Cadastrar
                         <i class="material-icons right">send</i>
                     </button>
                 </form>

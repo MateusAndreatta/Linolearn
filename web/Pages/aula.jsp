@@ -33,7 +33,7 @@
                     <form method="post" action="../VideoController">
 
                         <input type="hidden" name="videoId" value="<%out.print(video.getId());%>">
-                        <input type="hidden" name="courseId" value="<%out.print(video.getCourseId());%>">
+                        <input type="hidden" name="courseID" value="<%out.print(video.getCourseId());%>">
                         <%
                             if (watched) {
                         %>
@@ -41,7 +41,7 @@
                             <i class="material-icons right">send</i>
                         </button>
                         <%} else {%>
-                        <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Concluir
+                        <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="watch">Concluir
                             <i class="material-icons right">send</i>
                         </button>
                         <%}%>

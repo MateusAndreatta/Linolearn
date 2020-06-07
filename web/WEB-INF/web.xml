@@ -33,10 +33,6 @@
         <servlet-class>Controller.MyCourseController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CadastroAulaController</servlet-name>
-        <servlet-class>Controller.CadastroAulaController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controller.HomeController</servlet-class>
     </servlet>
@@ -75,10 +71,6 @@
     <servlet-mapping>
         <servlet-name>MyCourseController</servlet-name>
         <url-pattern>/MyCourseController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CadastroAulaController</servlet-name>
-        <url-pattern>/CadastroAulaController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
