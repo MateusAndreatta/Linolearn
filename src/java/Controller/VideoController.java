@@ -35,9 +35,13 @@ public class VideoController extends HttpServlet {
         String page = "Pages/curso.jsp";
         if (action.equals("edit")) {
             page = "Pages/updateAula.jsp?id=" + video.getCourseId();
-        } 
-        if(action.equals("watch")) {
+        }
+        if (action.equals("watch")) {
             page = "Pages/aula.jsp";
+        }
+        if (action.equals("delete")) {
+            int deleteVideo = deleteVideo(Integer.parseInt(id));
+            page = "CourseController?id="+video.getCourseId();
         }
         response.sendRedirect(page);
     }
@@ -121,5 +125,17 @@ public class VideoController extends HttpServlet {
             ex.printStackTrace();
         }
         return video;
+    }
+
+    private int deleteVideo(int id) {
+        Video video = new Video();
+        int result = -1;
+        try {
+            VideoDAO videoDao = new VideoDAO();
+            result = videoDao.delete(getVideo(id));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }
