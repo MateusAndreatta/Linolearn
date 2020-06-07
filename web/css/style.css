@@ -43,12 +43,14 @@ blockquote{
     display: none;
 }
 .options{
-    float: right;
-    right: 0;
-    position: absolute;
+    margin-left: auto;
 }
-.options a{
+.options a {
     color: black;
+}
+
+.hoverOptions:hover {
+   text-shadow: 0px 0px 6px grey;
 }
 .img-course{
     width: 100%;

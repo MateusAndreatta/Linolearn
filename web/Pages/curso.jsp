@@ -29,7 +29,7 @@
                 </div>
                 <div class="col s12 m6">
                     <h4><% out.print(curso.getName());%>
-                        <% if(owner) out.print("<a class='btn-floating btn-large waves-effect waves-light indigo right' href='updateCurso.jsp'><i class='material-icons'>edit</i></a>"); %>
+                        <% if(owner) out.print("<a class='btn-floating btn-small waves-effect waves-light blue' href='updateCurso.jsp'><i class='material-icons'>edit</i></a>"); %>
                     </h4>
                     <h6><% out.print(curso.getDescription());%></h6>
                     <%
@@ -65,10 +65,15 @@
                         <%
                         } else {
                         %>
-
-                        <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
-                            <i class="material-icons right">send</i>
-                        </button>
+                        
+                        <div class="col s12 m6">
+                            
+                            <% if(!owner) { %>
+                                <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            <% } %>
+                        </div>
                         <%
                             }
                         %>
@@ -91,10 +96,12 @@
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
                         <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
                         <input type="hidden" name="coursePercentage" value="<%out.print(curso.getCashbackPercentage());%>">
-
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Comprar curso
-                            <i class="material-icons right">send</i>
-                        </button>
+                        
+                        <% if(!owner) { %>
+                                <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            <% } %>
                     </form>
                     <%
                         }
@@ -118,11 +125,11 @@
                             <%
                                 if (watched) {
                             %>
-                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='material-icons'>edit</i></a><a href='../VideoController?id="+ v.getId()+ "&action=delete" +"'><i class='material-icons'>delete</i></a></div>");%></div>
+                            <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='blue-text material-icons  hoverOptions'>edit</i></a><a href='../VideoController?id="+ v.getId()+ "&action=delete" +"'><i class='material-icons hoverOptions'>delete</i></a></div>");%></div>
                                 <%
                                 } else {
                                 %>
-                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='material-icons'>edit</i></a><a href='../VideoController?id="+ v.getId()+ "&action=delete" +"'><i class='material-icons'>delete</i></a></div>");%></div>
+                            <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='../VideoController?id="+ v.getId()+ "&action=edit" +"'><i class='blue-text material-icons hoverOptions'>edit</i></a><a href='../VideoController?id="+ v.getId()+ "&action=delete" +"'><i class='red-text material-icons hoverOptions'>delete</i></a></div>");%></div>
                                 <%
                                     }
                                 %>

@@ -54,13 +54,12 @@
                         <div class="card">
                             <div class="card-image">
                                 <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
-                                <span class="card-title"><%out.print(c.getName());%></span>
                             </div>
                             <div class="card-content">
+                                <span class="card-title"><%out.print(c.getName());%></span>
                                 <p><%out.print(c.getDescription());%></p>
                             </div>
                             <div class="card-action">
-                                <!--<a href="curso.jsp">Ver curso</a>-->
                                 <a href="../CourseController?id=<%out.print(c.getId());%>">Ver curso</a>
                             </div>
                         </div>
