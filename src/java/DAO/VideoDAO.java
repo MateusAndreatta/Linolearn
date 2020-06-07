@@ -152,4 +152,8 @@ public class VideoDAO extends BaseDAO
             return -1;
         }
     }
+
+    public void delete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

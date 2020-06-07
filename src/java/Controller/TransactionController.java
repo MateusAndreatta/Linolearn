@@ -109,7 +109,6 @@ public class TransactionController extends HttpServlet {
         float valorComCoin = 0.0f;
         float valorRestante = 0.0f;
         int cashback = 0;
-        float valorRetorno = 0;
 
         valorNaCarteira = rs.getFloat("amount");
         valorComCoin = rs.getFloat("coin");
@@ -117,7 +116,6 @@ public class TransactionController extends HttpServlet {
 
         cashback = Integer.parseInt(request.getParameter("coursePercentage"));
 
-        valorRetorno = valorPrecoCurso / 100 * cashback;
 
         if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) {
             valorRestante = valorComCoin - valorPrecoCurso;
