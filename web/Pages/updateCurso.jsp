@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <h2 class="center">Alterar curso</h2>
-                <form class="col s12 card" method="post" action="" enctype = "multipart/form-data">
+                <form class="col s12 card" method="post" action="../CourseController" enctype = "multipart/form-data">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="nome" type="text" class="validate" value="${sessionScope.course.getName()}" name="nome" required>

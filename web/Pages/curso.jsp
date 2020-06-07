@@ -1,3 +1,4 @@
+<%@page import="sun.text.normalizer.UBiDiProps"%>
 <%@page import="Model.VideoWatched"%>
 <%@page import="Model.User"%>
 <%@page import="Model.Video"%>
@@ -46,7 +47,8 @@
                     <%
                         if (porcentagem == 100.0f) {
                     %>
-                    <form method="post" action="">
+                    <form method="post" action="../TransactionController?action=<%out.print(Util.Constants.TransactionType.RESGATAR);%>">
+                        
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
                         <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
@@ -69,7 +71,7 @@
                     <%
                         if (!buyed) {
                     %>
-                    <form method="post" action="../CourseController">
+                    <form method="post" action="../TransactionController?action=<%out.print(Util.Constants.TransactionType.COMPRAR);%>">
 
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">

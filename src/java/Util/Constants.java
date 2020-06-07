@@ -27,5 +27,12 @@ public final class Constants
         public static final int ADMINISTRATOR = 3;
         public static final int GOD = 4;
     }
+    
+    // Ações de transação
+    public final class TransactionType
+    {
+        public static final int COMPRAR = 0;
+        public static final int RESGATAR = 1;
+    }
         
 }
