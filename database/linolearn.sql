@@ -21,6 +21,7 @@ SET time_zone = "+03:00";
 --
 -- Banco de dados: `linolearn`
 --
+DROP SCHEMA IF EXISTS `linolearn`;
 CREATE SCHEMA IF NOT EXISTS `linolearn` DEFAULT CHARACTER SET utf8mb4 ;
 USE `linolearn` ;
 

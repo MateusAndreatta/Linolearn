@@ -4,6 +4,7 @@ import Model.User;
 import static Util.FormatArgs.convertToQueryArg;
 import java.security.NoSuchAlgorithmException;
 import Util.HashPassword;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ public class UserDAO extends BaseDAO
         this.nomeTabela = "user";
     }
     
-    public int create(User user) throws SQLException
+    public int create(User user) throws SQLException, UnsupportedEncodingException
     {
         try 
         {    
@@ -87,7 +88,7 @@ public class UserDAO extends BaseDAO
         }
     }
     
-    public int update(User user)
+    public int update(User user) throws UnsupportedEncodingException
     {
         try 
         {    
