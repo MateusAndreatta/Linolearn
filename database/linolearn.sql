@@ -61,7 +61,7 @@ CREATE TABLE `course_log_transaction` (
   `course_id` int(11) NOT NULL,
   `course_price` float NOT NULL,
   `cashback_percentage` int(11) NOT NULL,
-  `amount_cashback` float NOT NULL,
+  `amount_cashback` float NULL,
   `payment_status` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

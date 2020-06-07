@@ -15,6 +15,7 @@
         <jsp:include page="navbar.jsp" />
         <% Course curso = (Course) session.getAttribute("course");%>
         <% Boolean buyed = (Boolean) session.getAttribute("buyed");%>
+        <% Boolean cashback = (Boolean) session.getAttribute("userGotCashback");%>
         <% User user = (User) session.getAttribute("user");%>
         <% Boolean owner = (user.getId() == curso.getOwner()) ? true : false;%>
 
@@ -47,23 +48,34 @@
                         if (porcentagem == 100.0f) {
                     %>
                     <form method="post" action="../TransactionController?action=<%out.print(Util.Constants.TransactionType.RESGATAR);%>">
-                        
+
                         <input type="hidden" name="courseId" value="<%out.print(curso.getId());%>">
                         <input type="hidden" name="coursePrice" value="<%out.print(curso.getPrice());%>">
                         <input type="hidden" name="courseOwner" value="<%out.print(curso.getOwner());%>">
                         <input type="hidden" name="coursePercentage" value="<%out.print(curso.getCashbackPercentage());%>">
-
+                        <%
+                            if (!cashback) {
+                        %>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Resgatar linocoins!
                             <i class="material-icons right">send</i>
                         </button>
+                        <%
+                        } else {
+                        %>
+
+                        <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <%
+                            }
+                        %>
                     </form>
                     <%
                         }
                     %>
 
 
-                    <%
-                        }
+                    <%                        }
                     %>
 
 
@@ -104,13 +116,13 @@
                                 if (watched) {
                             %>
                             <div class="collapsible-header"><i class="material-icons">done</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='updateAula.jsp'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
-                            <%
-                            } else {
-                            %>
+                                <%
+                                } else {
+                                %>
                             <div class="collapsible-header"><i class="material-icons">clear</i><% out.print(v.getName());%> <% if(owner) out.print("<div class='options'><a href='updateAula.jsp'><i class='material-icons'>edit</i></a><a><i class='material-icons'>delete</i></a></div>");%></div>
-                            <%
-                                }
-                            %>
+                                <%
+                                    }
+                                %>
 
                             <div class="collapsible-body">
                                 <span><% out.print(v.getDescription());%></span>
@@ -148,7 +160,7 @@
         </script>
         <%                }
         %>
-       
-        
+
+
     </body>
 </html>
