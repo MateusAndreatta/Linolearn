@@ -89,11 +89,11 @@ public class CadastroCursoController extends HttpServlet {
                             switch (item.getFieldName()) {
                                 case "nome":
                                     System.out.println(item.getString());
-                                    course.setName(item.getString());
+                                    course.setName(item.getString("UTF-8"));
                                     break;
                                 case "descricao":
                                     System.out.println(item.getString());
-                                    course.setDescription(item.getString());
+                                    course.setDescription(item.getString("UTF-8"));
                                     break;
                                 case "preco":
                                     System.out.println(item.getString());
