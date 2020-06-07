@@ -3,52 +3,48 @@
 <html>
     <head>
         <jsp:include page="head.jsp" >
-            <jsp:param name="title" value="Deposito"/>
+            <jsp:param name="title" value="Depósito"/>
         </jsp:include>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />
-        <div class="container">
-            <div class="row">
-                <form class="col s12 card" method="POST" action="../WalletController">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">attach_money</i>
-                            <input id="icon_prefix2" type="number" name="valor" class="validate" required/>
-                            <label for="icon_prefix2">Valor do deposito</label>
-                        </div>
-                        <input id="icon_prefix2" type="hidden" class="validate" value="deposito"/>
-                        <button class="btn waves-effect waves-light" type="submit" name="action" value="deposito">Realizar deposito
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </form>
 
-                <form class="col s12 card" method="POST" action="../WalletController">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">attach_money</i>
-                            <input id="icon_prefix2" type="number" name="valor" class="validate" required/>
-                            <label for="icon_prefix2">Valor da retirada</label>
+        <jsp:include page="navbar.jsp" />
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <h2>Realizar depósito</h2>
+                    <form class="col s12 card" method="POST" action="../WalletController">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">attach_money</i>
+                                <input id="icon_prefix2" type="number" name="valor" class="validate" required/>
+                                <label for="icon_prefix2">Valor do depósito</label>
+                            </div>
+                            <input id="icon_prefix2" type="hidden" class="validate" value="deposito"/>
+                            <div class="col s12 p-4">
+                                <button class="btn right waves-effect waves-light" type="submit" name="action" value="deposito">Realizar depósito
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+
                         </div>
-                        <input id="icon_prefix2" type="hidden" class="validate" value="deposito"/>
-                        <button class="btn waves-effect waves-light" type="submit" name="action" value="retirada">Solicitar retirada
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </form>
+                    </form>
+
+                </div>
             </div>
-        </div>
-        <jsp:include page="footer.jsp" /> 
-                <%
-        if(request.getParameter("erro") != null){
+        </main>
         
-            %>
+        <jsp:include page="footer.jsp" /> 
+        
+        <%
+            if (request.getParameter("erro") != null) {
+
+        %>
         <script>
-                 M.toast({html: 'Não foi possivel realizar operação'});
+            M.toast({html: 'Não foi possivel realizar operação'});
         </script>
-            <%
-        }
+        <%                }
         %>
     </body>
 </html>

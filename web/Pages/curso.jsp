@@ -11,24 +11,27 @@
             <jsp:param name="title" value="Curso"/>
         </jsp:include>
     </head>
+    
     <body>
         <jsp:include page="navbar.jsp" />
+        
         <% Course curso = (Course) session.getAttribute("course");%>
         <% Boolean buyed = (Boolean) session.getAttribute("buyed");%>
         <% Boolean cashback = (Boolean) session.getAttribute("userGotCashback");%>
         <% User user = (User) session.getAttribute("user");%>
         <% Boolean owner = (user.getId() == curso.getOwner()) ? true : false;%>
 
+        <main>
         <div class="container">
-            <div class="row card">
-                <div class="col s12 m5">
+            <div class="row">
+                <div class="col s12 m6" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                     <img class="img-course" src="../imgs/uploads/<% out.print(curso.getImagePath());%>">
                 </div>
-                <div class="col s12 m7">
+                <div class="col s12 m6">
                     <h4><% out.print(curso.getName());%>
                         <% if(owner) out.print("<a class='btn-floating btn-large waves-effect waves-light indigo right' href='updateCurso.jsp'><i class='material-icons'>edit</i></a>"); %>
                     </h4>
-                    <h5><% out.print(curso.getDescription());%></h5>
+                    <h6><% out.print(curso.getDescription());%></h6>
                     <%
                         if (buyed) {
                             List<Video> v = (List<Video>) request.getSession().getAttribute("videos");
@@ -150,7 +153,11 @@
                 </div>
             </div>
         </div>
+        
+        </main>
+                    
         <jsp:include page="footer.jsp" />
+        
         <%
             if (request.getParameter("erro") != null) {
 

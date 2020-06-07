@@ -11,44 +11,48 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <% Video video = (Video) session.getAttribute("video");%>
-        <%
-            boolean watched = false;
-            for (VideoWatched vw : (List<VideoWatched>) request.getSession().getAttribute("videosWatched")) {
-                if (vw.getIdVideo() == video.getId()) {
-                    watched = true;
-                }
-            }
-        %>
-        <div class="container">
-            <div class="row card">
-                <div class="col s12">
-                    <iframe id="ytplayer" type="text/html" width="1030" height="560"
-                            src="https://www.youtube.com/embed/<% out.print(video.getPath());%>?autoplay=1"
-                            frameborder="0"></iframe>
-                </div>
-                <div class="col s12 m7">
-                    <h4><% out.print(video.getName());%></h4>
-                    <p><% out.print(video.getDescription());%></p>
-                    <form method="post" action="../VideoController">
 
-                        <input type="hidden" name="videoId" value="<%out.print(video.getId());%>">
-                        <input type="hidden" name="courseID" value="<%out.print(video.getCourseId());%>">
-                        <%
-                            if (watched) {
-                        %>
-                        <button class="btn waves-effect waves-light disabled margin-botton"  type="submit" name="action">Concluir
-                            <i class="material-icons right">send</i>
-                        </button>
-                        <%} else {%>
-                        <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="watch">Concluir
-                            <i class="material-icons right">send</i>
-                        </button>
-                        <%}%>
-                    </form>
+        <main>
+            <% Video video = (Video) session.getAttribute("video");%>
+            <%
+                boolean watched = false;
+                for (VideoWatched vw : (List<VideoWatched>) request.getSession().getAttribute("videosWatched")) {
+                    if (vw.getIdVideo() == video.getId()) {
+                        watched = true;
+                    }
+                }
+            %>
+            <div class="container">
+                <div class="row card">
+                    <div class="col s12">
+                        <iframe id="ytplayer" type="text/html" width="1030" height="560"
+                                src="https://www.youtube.com/embed/<% out.print(video.getPath());%>?autoplay=1"
+                                frameborder="0"></iframe>
+                    </div>
+                    <div class="col s12 m7">
+                        <h4><% out.print(video.getName());%></h4>
+                        <p><% out.print(video.getDescription());%></p>
+                        <form method="post" action="../VideoController">
+
+                            <input type="hidden" name="videoId" value="<%out.print(video.getId());%>">
+                            <input type="hidden" name="courseID" value="<%out.print(video.getCourseId());%>">
+                            <%
+                                if (watched) {
+                            %>
+                            <button class="btn waves-effect waves-light disabled margin-botton"  type="submit" name="action">Concluir
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <%} else {%>
+                            <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="watch">Concluir
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <%}%>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
+
         <jsp:include page="footer.jsp" />
     </body>
 </html>

@@ -5,41 +5,49 @@
 <html>
     <head>
         <jsp:include page="head.jsp" >
-            <jsp:param name="title" value="Home"/>
+            <jsp:param name="title" value="Início"/>
         </jsp:include>
     </head>
     <body>
+
         <jsp:include page="navbar.jsp" />
-        <div class="container">
-            <h3>Olá ${sessionScope.user.getFirstName()}</h3>
-            <div class="row">
 
-                <%
-                    for (Course c : (List<Course>) request.getSession().getAttribute("cursos")) {
-                %>
+        <main>
+            <div class="container">
 
-                <div class="col s12 m3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
-                            <span class="card-title"><%out.print(c.getName());%></span>
-                        </div>
-                        <div class="card-content">
-                            <p><%out.print(c.getDescription());%></p>
-                        </div>
-                        <div class="card-action">
-                            <!--<a href="curso.jsp">Ver curso</a>-->
-                            <a href="../CourseController?id=<%out.print(c.getId());%>">Ver curso</a>
-                        </div>
+                <div class="row">
+                    <div class="col s12 m3">
+                        <h4>Olá ${sessionScope.user.getFirstName()}</h4>
                     </div>
                 </div>
 
-                <%
-                    }
-                %>
-            </div>
+                <div class="row">
 
-        </div>
+                    <%
+                        for (Course c : (List<Course>) request.getSession().getAttribute("cursos")) {
+                    %>
+
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title bold"><%out.print(c.getName());%></span>
+                                <p><%out.print(c.getDescription());%></p>
+                            </div>
+                            <div class="card-action">
+                                <a href="../CourseController?id=<%out.print(c.getId());%>">Ver curso</a>
+                            </div>
+                        </div>
+                    </div>
+                            
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </main>
         <jsp:include page="footer.jsp" />
     </body>
 </html>
