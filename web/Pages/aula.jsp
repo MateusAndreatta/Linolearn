@@ -23,13 +23,13 @@
                 }
             %>
             <div class="container">
-                <div class="row card">
-                    <div class="col s12">
-                        <iframe id="ytplayer" type="text/html" width="1030" height="560"
+                <div class="row">
+                    <div class="col s12" style="margin-top: 40px;">
+                        <iframe id="ytplayer" type="text/html" width="100%" height="500px"
                                 src="https://www.youtube.com/embed/<% out.print(video.getPath());%>?autoplay=1"
                                 frameborder="0"></iframe>
                     </div>
-                    <div class="col s12 m7">
+                    <div class="col s12">
                         <h4><% out.print(video.getName());%></h4>
                         <p><% out.print(video.getDescription());%></p>
                         <form method="post" action="../VideoController">
@@ -39,12 +39,13 @@
                             <%
                                 if (watched) {
                             %>
-                            <button class="btn waves-effect waves-light disabled margin-botton"  type="submit" name="action">Concluir
-                                <i class="material-icons right">send</i>
+                            <button class="btn right disabled"  type="submit" name="action">Vídeo já assistido
+                                <i class="right material-icons" style="padding-right: 0; margin-right: -40px!important;">checked</i>
                             </button>
                             <%} else {%>
-                            <button class="btn waves-effect waves-light margin-botton" type="submit" name="action" value="watch">Concluir
-                                <i class="material-icons right">send</i>
+                            
+                            <button class="btn right waves-effect waves-light margin-botton" type="submit" name="action" value="watch">Concluir
+                                <i class="material-icons right" style="padding-right: 0;">check</i>
                             </button>
                             <%}%>
                         </form>

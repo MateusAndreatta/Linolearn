@@ -59,18 +59,18 @@
                         <%
                             if (!cashback) {
                         %>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Resgatar linocoins!
+                        <button class="btn right waves-effect waves-light" type="submit" name="action">Resgatar linocoins!
                             <i class="material-icons right">send</i>
                         </button>
                         <%
                         } else {
                         %>
                         
-                        <div class="col s12 m6">
+                        <div class="col s12">
                             
                             <% if(!owner) { %>
-                                <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
-                                    <i class="material-icons right">send</i>
+                                <button class="btn right waves-effect waves-light disabled" type="submit" name="action">Cashback resgatado!
+                                    <i class="material-icons right"  style="padding-right: 0;margin-right: -40px;">checked</i>
                                 </button>
                             <% } %>
                         </div>
@@ -98,10 +98,15 @@
                         <input type="hidden" name="coursePercentage" value="<%out.print(curso.getCashbackPercentage());%>">
                         
                         <% if(!owner) { %>
-                                <button class="btn waves-effect waves-light disabled" type="submit" name="action">Resgatar linocoins!
+                        <div class="col s12">
+                            <br />
+                            <br />
+                                <button class="btn right waves-effect waves-light" type="submit" name="action">Comprar curso por R$<%out.print(curso.getPrice());%>
                                     <i class="material-icons right">send</i>
                                 </button>
-                            <% } %>
+                        </div>
+                        <% } %>
+                        
                     </form>
                     <%
                         }
@@ -139,7 +144,9 @@
                                 <%
                                     if (buyed) {
                                 %>
-                                <a href="../VideoController?id=<%out.print(v.getId());%>&action=watch">Assitir a aula</a>
+                                <br />
+                                <br />
+                                    <a href="../VideoController?id=<%out.print(v.getId());%>&action=watch">Assitir a aula</a>
                                 <%
                                     }
                                 %>

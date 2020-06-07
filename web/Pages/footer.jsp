@@ -25,7 +25,7 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    Made by suor, lágrimas e Java 2002 - <i class="tiny material-icons">tag_faces</i>
+                    Made with suor, lágrimas e Java 2002 - <i class="tiny material-icons">tag_faces</i>
                 </div>
             </div>
         </footer>

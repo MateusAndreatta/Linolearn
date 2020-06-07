@@ -24,9 +24,10 @@
                         <div class="card">
                             <div class="card-image">
                                 <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
-                                <span class="card-title"><%out.print(c.getName());%></span>
+                                
                             </div>
                             <div class="card-content">
+                                <p class="card-title"><%out.print(c.getName());%></p>
                                 <p><%out.print(c.getDescription());%></p>
                             </div>
                             <div class="card-action">

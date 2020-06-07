@@ -35,6 +35,8 @@
                             <div class="card-content">
                                 <span class="card-title bold"><%out.print(c.getName());%></span>
                                 <p><%out.print(c.getDescription());%></p>
+                                <br />
+                                <p>R$ <% out.print(c.getPrice()); %> - Cb <b><% out.print(c.getCashbackPercentage()); %>%</b></p>
                             </div>
                             <div class="card-action">
                                 <a href="../CourseController?id=<%out.print(c.getId());%>">Ver curso</a>
