@@ -21,7 +21,7 @@
                     %>
 
                     <div class="col s12 m3">
-                        <div class="card">
+                        <div class="card card-home">
                             <div class="card-image">
                                 <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
                                 
@@ -52,7 +52,7 @@
                     %>
 
                     <div class="col s12 m3">
-                        <div class="card">
+                        <div class="card card-home">
                             <div class="card-image">
                                 <img src="../imgs/uploads/<%out.print(c.getImagePath());%>">
                             </div>

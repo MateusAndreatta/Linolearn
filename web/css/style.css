@@ -94,3 +94,13 @@ blockquote{
 .input-field .prefix.active {
     color: #2196f3!important;
 }
+
+.card-home{
+    /*height: 430px;*/
+}
+.card-home .card-image{
+    height: 150px;
+}
+.card-home .card-content{
+    height: 230px;
+}
