@@ -4,18 +4,13 @@ import DAO.CourseDAO;
 import DAO.CourseLogTransactionDAO;
 import DAO.VideoDAO;
 import DAO.VideoWatchedDAO;
-import DAO.WalletDAO;
 import Model.Course;
-import Model.CourseLogTransaction;
 import Model.User;
 import Model.Video;
 import Model.VideoWatched;
-import Model.Wallet;
-import Util.Constants;
 import Util.Global;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -31,6 +26,7 @@ public class CourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String parameter = request.getParameter("id");
 
         HttpSession session = request.getSession();
@@ -46,15 +42,44 @@ public class CourseController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
 
+        try 
+        {
+            
+            Course c = new Course();
+            CourseDAO cd = new CourseDAO();
 
-        
+            ResultSet rs = cd.findById(Integer.parseInt(request.getParameter("courseId")));
+
+            rs.next();
+            
+            c.setId(rs.getInt("id"));
+            c.setName(request.getParameter("courseName"));
+            c.setDescription(request.getParameter("courseDescription"));
+            c.setCashbackPercentage(Integer.parseInt(request.getParameter("courseCashbackPercentage")));
+            c.setImagePath(request.getParameter("courseImagePath"));
+            
+            int sucesso = cd.update(c);
+            
+            if (sucesso == 1) 
+            {
+                 response.sendRedirect("Pages/meusCursos.jsp?sucesso=true");
+            }
+            
+            response.sendRedirect("Pages/updateCurso.jsp?erro=2");
+
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
     }
 
     private Course getCourse(int id) {
+
         Course course = new Course();
+
         try {
             CourseDAO courseDao = new CourseDAO();
             ResultSet rs = courseDao.findById(id);
@@ -74,9 +99,12 @@ public class CourseController extends HttpServlet {
         return course;
     }
 
-    private List<Video> getVideos(int id) {
+    private List<Video> getVideos(int id) 
+    {
         List<Video> list = new ArrayList();
-        try {
+        
+        try 
+        {
             VideoDAO videoDao = new VideoDAO();
             ResultSet rs = videoDao.findAllVideosByCourseId(id);
 
@@ -95,27 +123,38 @@ public class CourseController extends HttpServlet {
         return list;
     }
 
-    private boolean userHasBuyed(int idUser, int idCourse) {
+    private boolean userHasBuyed(int idUser, int idCourse) 
+    {
+        
         boolean comprou = false;
-        try {
+        
+        try 
+        {
             CourseLogTransactionDAO courseLog = new CourseLogTransactionDAO();
             ResultSet rs = courseLog.userHasBuyed(idUser, idCourse);
+            
             while (rs.next()) {
                 comprou = true;
             }
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
         return comprou;
     }
 
-    private List<VideoWatched> getVideosWatched(int idUser, int idCourse) {
+    private List<VideoWatched> getVideosWatched(int idUser, int idCourse)
+    {
         List<VideoWatched> list = new ArrayList();
-        try {
+        
+        try 
+        {
             VideoWatchedDAO videoDao = new VideoWatchedDAO();
             ResultSet rs = videoDao.getAllWatchedVideosByCourseIdAndUserId(idCourse, idUser);
 
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 VideoWatched video = new VideoWatched();
                 video.setId(rs.getInt("id"));
                 video.setCourseId(rs.getInt("course_id"));
@@ -123,9 +162,14 @@ public class CourseController extends HttpServlet {
                 video.setIdUser(rs.getInt("id_user"));
                 list.add(video);
             }
-        } catch (Exception ex) {
+            
+        }
+        
+        catch (Exception ex) 
+        {
             ex.printStackTrace();
         }
+        
         return list;
     }
 }
