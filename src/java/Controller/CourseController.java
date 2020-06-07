@@ -55,18 +55,20 @@ public class CourseController extends HttpServlet {
             rs.next();
 
             c.setId(rs.getInt("id"));
-            c.setName(request.getParameter("courseName"));
-            c.setDescription(request.getParameter("courseDescription"));
-            c.setCashbackPercentage(Integer.parseInt(request.getParameter("courseCashbackPercentage")));
-            c.setImagePath(request.getParameter("courseImagePath"));
+            c.setName(request.getParameter("nome"));
+            c.setDescription(request.getParameter("descricao"));
+            c.setPrice(Float.parseFloat(request.getParameter("preco")));
+            c.setCashbackPercentage(Integer.parseInt(request.getParameter("porcentagem")));
+            c.setImagePath(rs.getString("image_path"));
+            c.setOwner(rs.getInt("owner"));
 
             int sucesso = cd.update(c);
 
             if (sucesso == 1) {
-                response.sendRedirect("Pages/meusCursos.jsp?sucesso=true");
+                response.sendRedirect("CourseController?id=" + c.getId());
+            } else {
+                response.sendRedirect("Pages/updateCurso.jsp?erro=2");
             }
-
-            response.sendRedirect("Pages/updateCurso.jsp?erro=2");
 
         } catch (Exception ex) {
             ex.printStackTrace();

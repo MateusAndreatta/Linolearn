@@ -10,8 +10,9 @@
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="row">
-                <h2 class="center">Alterar curso</h2>
-                <form class="col s12 card" method="post" action="../CourseController" enctype = "multipart/form-data">
+                <h2 class="center">Alterar curso ${sessionScope.course.getId()}</h2>
+                <form class="col s12 card" method="post" action="../CourseController">
+                    <input type="hidden" value="${sessionScope.course.getId()}" name="courseId">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="nome" type="text" class="validate" value="${sessionScope.course.getName()}" name="nome" required>
@@ -32,15 +33,6 @@
                         <div class="input-field col s12 m6">
                             <input id="cashback" type="text" class="validate" value="${sessionScope.course.getCashbackPercentage()}" name="porcentagem" required>
                             <label for="cashback">Porcentagem de cashback</label>
-                        </div>
-                    </div>
-                    <div class="file-field input-field">
-                        <div class="btn">
-                            <span>Capa do curso</span>
-                            <input type="file" name="capa" required>
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" name="capa" value="${sessionScope.course.getImagePath()}" type="text" required>
                         </div>
                     </div>
                     <button class="btn waves-effect waves-light margin-botton" type="submit" name="action">Salvar
