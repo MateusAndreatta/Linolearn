@@ -22,9 +22,7 @@ public class TransactionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("poi");
-        
+
     }
 
     @Override
@@ -37,8 +35,7 @@ public class TransactionController extends HttpServlet {
 
             User user = Global.getUser(request, response);
 
-            switch (Integer.parseInt(request.getParameter("action")))
-            {
+            switch (Integer.parseInt(request.getParameter("action"))) {
                 case 0:
                     comprarCurso(user, request, response);
                     break;
@@ -46,9 +43,7 @@ public class TransactionController extends HttpServlet {
                     ResgatarCashback(user, request, response);
             }
 
-        }
-        catch (IOException | NumberFormatException | SQLException e) 
-        {
+        } catch (IOException | NumberFormatException | SQLException e) {
             response.sendRedirect("Pages/curso.jsp?erro=1");
         }
     }
@@ -58,6 +53,7 @@ public class TransactionController extends HttpServlet {
 
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = new Wallet();
+        CourseLogTransaction courseLogTransaction = new CourseLogTransaction();
 
         CourseLogTransactionDAO log = new CourseLogTransactionDAO();
 
@@ -66,18 +62,38 @@ public class TransactionController extends HttpServlet {
 
         rs.next();
         rsLog.next();
+
+        float valorRetorno = 0;
+        float cashback = 0;
+        float valorPrecoCurso = 0;
+
+        cashback = rsLog.getInt("cashback_percentage");
+        valorPrecoCurso = rsLog.getFloat("course_price");
         
-        wallet.setAmount(rs.getFloat("amount") + rsLog.getFloat("amount_cashback"));
-        wallet.setCoin(rs.getFloat("coin"));
+        valorRetorno = valorPrecoCurso / 100 * cashback;
+
+        courseLogTransaction.setAmountCashback(valorRetorno);
+        courseLogTransaction.setBuyer(rsLog.getInt("buyer"));
+        courseLogTransaction.setCashbackPercentage(rsLog.getInt("cashback_percentage"));
+        courseLogTransaction.setCourseId(rsLog.getInt("course_id"));
+        courseLogTransaction.setCoursePrice(rsLog.getFloat("course_price"));
+        courseLogTransaction.setDate(rsLog.getString("date"));
+        courseLogTransaction.setId(rsLog.getInt("id"));
+        courseLogTransaction.setPaymentStatus(rsLog.getInt("payment_status"));
+        courseLogTransaction.setSeller(rsLog.getInt("seller"));
+
+        wallet.setAmount(rs.getFloat("amount"));
+        wallet.setCoin(rs.getFloat("coin") + valorRetorno);
         wallet.setId(rs.getInt("id"));
         wallet.setUser(rs.getInt("user"));
-        
+
+        log.update(courseLogTransaction);
         walletDAO.update(wallet);
 
         response.sendRedirect("MyCourseController");
-        
+
     }
-    
+
     private void comprarCurso(User user, HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
 
@@ -103,19 +119,14 @@ public class TransactionController extends HttpServlet {
 
         valorRetorno = valorPrecoCurso / 100 * cashback;
 
-        if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) 
-        {
+        if ((valorNaCarteira + valorComCoin) >= valorPrecoCurso) {
             valorRestante = valorComCoin - valorPrecoCurso;
 
-            if (valorRestante < 0) 
-            {
+            if (valorRestante < 0) {
                 valorNaCarteira += valorRestante;
                 valorComCoin = 0;
-            
-            } 
-            
-            else 
-            {
+
+            } else {
                 valorComCoin -= valorPrecoCurso;
                 //valorNaCarteira += valorRetorno;
             }
@@ -135,7 +146,6 @@ public class TransactionController extends HttpServlet {
             cl.setCourseId(Integer.parseInt(request.getParameter("courseId")));
             cl.setCoursePrice(valorPrecoCurso);
             cl.setCashbackPercentage(cashback);
-            cl.setAmountCashback(valorRetorno);
             cl.setPaymentStatus(Constants.PaymentStatus.FINALIZADO);
 
             log.create(cl);
@@ -158,4 +168,3 @@ public class TransactionController extends HttpServlet {
         }
     }
 }
-
